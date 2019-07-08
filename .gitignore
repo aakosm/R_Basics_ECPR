@@ -29,3 +29,5 @@ admin_things/
 admin_things
 .DS_Store
 *.Rproj
+syllabus.md
+.vscode/settings.json
