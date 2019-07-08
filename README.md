@@ -1,6 +1,6 @@
 # R Basics - An intro course for everything R
 
-This is an introductory course for R, taught at the [ECPR Summer School 2019](https://ecpr.eu/Events/131). For the details on this course please see the [syllabus]() and the [course's webpage](https://ecpr.eu/Events/PanelDetails.aspx?PanelID=8411&EventID=131)
+This is an introductory course for R, taught at the [ECPR Summer School 2019](https://ecpr.eu/Events/131). For the details on this course please see the [syllabus](https://github.com/aakosm/R_Basics_ECPR/blob/master/syllabus.pdf) and the [course's webpage](https://ecpr.eu/Events/PanelDetails.aspx?PanelID=8411&EventID=131)
 
 
 
