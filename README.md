@@ -35,7 +35,7 @@ You can get the fully functional free version from here: [https://www.rstudio.co
 **Day 1** (Friday 26 July 13:00–15:00 and 15:30–18:00)
 
 1. Intro to R - [notebook](https://aakosm.github.io/R_Basics_ECPR/01_intro/01_intro.html)
-2. Importing, exporting and exploring data 
+2. Importing, exporting and exploring data - [notebook](https://aakosm.github.io/R_Basics_ECPR/02_data_exploration/02_data_import.html)
 3. Data wrangling pt.1 
 4. Data wrangling pt.2 
 
