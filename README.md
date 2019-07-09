@@ -2,7 +2,9 @@
 
 
 
-This is an introductory course for R, taught at the [ECPR Summer School 2019](https://ecpr.eu/Events/131). For the details on this course please see the [syllabus](https://github.com/aakosm/R_Basics_ECPR/blob/master/syllabus.pdf) and the [course's webpage](https://ecpr.eu/Events/PanelDetails.aspx?PanelID=8411&EventID=131). The course repository is here: [https://aakosm.github.io/R_Basics_ECPR](https://aakosm.github.io/R_Basics_ECPR) which contains all the materials and source codes for the notebooks used during the course.
+This is an introductory course for R, taught at the [ECPR Summer School 2019](https://ecpr.eu/Events/131). For the details on this course please see the [syllabus](https://github.com/aakosm/R_Basics_ECPR/blob/master/syllabus.pdf) and the [course's ECPR webpage](https://ecpr.eu/Events/PanelDetails.aspx?PanelID=8411&EventID=131). The course repository is here: [https://github.com/aakosm/R_Basics_ECPR](https://github.com/aakosm/R_Basics_ECPR) which contains all the materials and source codes for the notebooks used during the course.
+
+The course is also available as a GitHub Page here if you want less clutter: [https://aakosm.github.io/R_Basics_ECPR/](https://aakosm.github.io/R_Basics_ECPR/)
 
 
 
@@ -17,7 +19,7 @@ Having the latest versions of both R and RStudio is advised, so if you have R an
 ### Download and install R
 
 * Download R for windows from here: [https://cran.r-project.org/bin/windows/base/](https://cran.r-project.org/bin/windows/base/)
-* Dowload R for OSX from here: [https://cran.r-project.org/bin/macosx/](https://cran.r-project.org/bin/macosx/)
+* Download R for OSX from here: [https://cran.r-project.org/bin/macosx/](https://cran.r-project.org/bin/macosx/)
 * Download R for Linux: [https://cran.r-project.org/](https://cran.r-project.org/)
 
 
