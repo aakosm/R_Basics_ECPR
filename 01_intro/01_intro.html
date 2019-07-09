@@ -3247,8 +3247,7 @@ div.tocify {
 <a class="sourceLine" id="cb12-5" title="5"><span class="co">#&gt; [1] 576</span></a></code></pre></div>
 <div id="data-frames" class="section level3">
 <h3><span class="header-section-number">3.3.1</span> Data frames</h3>
-<p>A data frame is a rectangular data structure, where usually each row is an observation and each column is a variable. It can contain multiple types of data but columns can only contain one type. Data frames are made up of various columns that can contain various types of data. The below data frame called <code>df</code> look like this. Note the <code>&lt;chr&gt;</code>, <code>&lt;dbl&gt;</code> and <code>&lt;fctr&gt;</code> tags below their names!</p>
-<p>Our data frame is made up of columns (our variables) and rows (our observations). Each variable has a type, but you cannot mix multiple types of data within one column.</p>
+<p>A data frame is a rectangular data structure, where usually each row is an observation and each column is a variable. It can contain multiple types of data but columns can only contain one type. Data frames are made up of various columns that can contain various types of data. The below data frame called <code>df</code> looks like this. Note the <code>&lt;chr&gt;</code>, <code>&lt;dbl&gt;</code> and <code>&lt;fctr&gt;</code> tags below their names!</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">df</a></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -3457,26 +3456,22 @@ div.tocify {
 <div id="lists" class="section level3">
 <h3><span class="header-section-number">3.3.4</span> Lists</h3>
 <p>Lists are versatile data structures where each element can be vectors of different lenght and type. What that means is that we can combine our objects that we created in this session into a list with the <code>list</code> function.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">list1 &lt;-<span class="st"> </span><span class="kw">list</span>(logic, country, mat1, text1)</a>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">list1 &lt;-<span class="st"> </span><span class="kw">list</span>(logic, mat1, text1)</a>
 <a class="sourceLine" id="cb33-2" title="2"><span class="co"># now let&#39;s check this monstrosity</span></a>
 <a class="sourceLine" id="cb33-3" title="3">list1</a>
 <a class="sourceLine" id="cb33-4" title="4"><span class="co">#&gt; [[1]]</span></a>
 <a class="sourceLine" id="cb33-5" title="5"><span class="co">#&gt; [1]  TRUE FALSE FALSE</span></a>
 <a class="sourceLine" id="cb33-6" title="6"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb33-7" title="7"><span class="co">#&gt; [[2]]</span></a>
-<a class="sourceLine" id="cb33-8" title="8"><span class="co">#&gt; [1] &quot;Thailand&quot;    &quot;Norway&quot;      &quot;North Korea&quot; &quot;Canada&quot;      &quot;Slovenia&quot;   </span></a>
-<a class="sourceLine" id="cb33-9" title="9"><span class="co">#&gt; [6] &quot;France&quot;      &quot;Venezuela&quot;  </span></a>
-<a class="sourceLine" id="cb33-10" title="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb33-11" title="11"><span class="co">#&gt; [[3]]</span></a>
-<a class="sourceLine" id="cb33-12" title="12"><span class="co">#&gt;       Var1 Var2 Var3 Var4</span></a>
-<a class="sourceLine" id="cb33-13" title="13"><span class="co">#&gt; case1    1    6   11   16</span></a>
-<a class="sourceLine" id="cb33-14" title="14"><span class="co">#&gt; case2    2    7   12   17</span></a>
-<a class="sourceLine" id="cb33-15" title="15"><span class="co">#&gt; case3    3    8   13   18</span></a>
-<a class="sourceLine" id="cb33-16" title="16"><span class="co">#&gt; case4    4    9   14   19</span></a>
-<a class="sourceLine" id="cb33-17" title="17"><span class="co">#&gt; case5    5   10   15   20</span></a>
-<a class="sourceLine" id="cb33-18" title="18"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb33-19" title="19"><span class="co">#&gt; [[4]]</span></a>
-<a class="sourceLine" id="cb33-20" title="20"><span class="co">#&gt; [1] &quot;Han&quot;   &quot;shot&quot;  &quot;first&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb33-8" title="8"><span class="co">#&gt;       Var1 Var2 Var3 Var4</span></a>
+<a class="sourceLine" id="cb33-9" title="9"><span class="co">#&gt; case1    1    6   11   16</span></a>
+<a class="sourceLine" id="cb33-10" title="10"><span class="co">#&gt; case2    2    7   12   17</span></a>
+<a class="sourceLine" id="cb33-11" title="11"><span class="co">#&gt; case3    3    8   13   18</span></a>
+<a class="sourceLine" id="cb33-12" title="12"><span class="co">#&gt; case4    4    9   14   19</span></a>
+<a class="sourceLine" id="cb33-13" title="13"><span class="co">#&gt; case5    5   10   15   20</span></a>
+<a class="sourceLine" id="cb33-14" title="14"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb33-15" title="15"><span class="co">#&gt; [[3]]</span></a>
+<a class="sourceLine" id="cb33-16" title="16"><span class="co">#&gt; [1] &quot;Han&quot;   &quot;shot&quot;  &quot;first&quot;</span></a></code></pre></div>
 <p>You can add attributes to lists as well.</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">list2 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">letters =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>], <span class="dt">numbers =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">logical =</span> <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>))</a>
 <a class="sourceLine" id="cb34-2" title="2"></a>
