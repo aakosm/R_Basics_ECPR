@@ -23,12 +23,12 @@ knitr::opts_chunk$set(echo = TRUE,
 )
 ```
 
-> Main packages used: `ggplot2`, `ggraph` <br>   
-> Main functions covered: `ggplot()`, `geom_*()`, `scale_*_*()`, `labs()`, `theme_*()`   <br>
+> Main packages used: `ggplot2`, `ggraph`  
+> Main functions covered: `ggplot()`, `geom_*()`, `scale_*_*()`, `labs()`, `theme_*()` 
 > Supplementary resources: <br>
 > Some examples in this workshop are adapted from the great [Data Visualization - A practical introduction](http://socviz.co/) from Kieran Healey. <br>
-> More on dataviz theory and best practice: [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/) by Claus O. Wilke <br>
-> More on graphics with R: [R Graphics Cookbook](https://r-graphics.org/) by Winston Chang <br>
+> Dataviz theory and best practice: [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/) by Claus O. Wilke <br>
+> Graphics with R: [R Graphics Cookbook](https://r-graphics.org/) by Winston Chang <br>
 > [ggplot2 cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf) <br>
 > [list of ggplot2 extensions](https://www.ggplot2-exts.org/) <br>
 
