@@ -2,14 +2,17 @@
 title: "Session Three"
 subtitle: "Transforming and wrangling data 1/2"
 author: "Akos Mate"
-date: '2018 July'
+date: '2019 July'
 output:
     html_document:
+        code_folding: "show"
+        number_sections: TRUE
         toc: true
-        toc_depth: 3
+        toc_depth: 4
         toc_float: true
-        theme: readable
-        css: style.css
+        theme: flatly
+        highlight: tango
+        css: ../rmd_style.css
 ---
 
 ```{r setup, include=FALSE}
@@ -21,11 +24,11 @@ knitr::opts_chunk$set(echo = TRUE,
 ```
 
 
-> Main packages used: `base R`, `tidyr`, `ggplot2`, `dplyr`     
+> Main packages used: `tidyr`, `dplyr`, `base R`     
 > Main functions covered: `tidyr::gather`, `tidyr::spread`, `dplyr::group_by`, `dplyr::summarise`, `dplyr::bind_rows`, `dplyr::bind_cols` ,`runif`, `[`, `[[`    
 > Supplementary resources: [Data Wrangling cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
 
-# 1. Tidyverse overview
+# Tidyverse overview
 
 From this session we will mostly start using packages from the `tidyverse` ecosystem. These include:
 
@@ -44,7 +47,7 @@ The "base R vs. tidyverse" debate has been going on in the R community for a whi
 
 We will still go over base R to provide you some alternatives if you need.
 
-## 1.1 The pipe
+## The pipe
 
 The pipe is this operator: ` %>% ` You can access with the shortcut of `Ctrl+Shift+M` (or type it out every time, but there are better things in life than that).  
 
@@ -62,15 +65,14 @@ mydata %>% head()
 Piping together various steps of our data manipulation process greatly increases code readability and our quality of life. In a moment we will see how piping can be super useful.
 
 
-# 2. Tidy data
+# Tidy data
 
 Let's load our packages.
 
 ```{r}
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-library(readr)
+library(dplyr) # for data manipulation
+library(tidyr) # for reshaping data
+library(readr) # loading data
 ```
 
 
@@ -122,16 +124,19 @@ Illustrating of what is happening from the [R for Data Science](http://r4ds.had.
 knitr::include_graphics("figures/tidy_gather.png")
 ```
 
-## 2.1 Transforming datasets
+## Transforming datasets
 
 We will use the `tidyr` package to shape our data into the desired format. A key concept is the key-value pairs. For the wide dataset above, the values are the inflation numbers and the keys are the column headers (years). So the `1.2` (2007 inflation in Hungary) and `2007` is such a key-value pair.
 
 We will use this concept to our transformations. The two main functions we'll use from `tidyr` are the `gather()` to create tidy data from wide data format. 
 
-Let's load our dummy dataset:
+Let's load our dummy dataset.
 
 ```{r}
-wide_df <- read.csv("https://www.dropbox.com/s/009zu3nngpabo4k/wide_df.csv?dl=1")
+wide_df <- read_csv("data/wide_df.csv")
+
+
+wide_df
 ```
 
 
@@ -149,11 +154,12 @@ wide_df <- data.frame(
 
 wide_df
 
+write.csv(wide_df, file = "data/wide_df.csv", row.names = FALSE)
 ```
 
 Let's use the `gather` function and let's meet the ` %>% ` pipe operator (shortcut: Ctrl + Shift + M) again! Here, we specify the range of columns that contain our key-value pairs, and also the `key` (the year in this case) and the `value` (inflation).
 
-```{r eval=FALSE}
+```{r}
 long_df <- wide_df %>% 
 gather("2006":"2009", key = "year", value = "inflation")
 
@@ -169,63 +175,9 @@ long_df %>% spread(key = "year", value = "inflation")
 ```
 
 
-> **Excercise:**  
-(1) load a data set on financial data of Microsoft and Tesla from this link: "https://www.dropbox.com/s/xws0hwat50pq62r/stock_data.csv?dl=1".  
-(2) Try to use the readr::read_csv() and load directly from the url instead of downloading the file. The dataset contains 3 columns: a date and closing prices for Tesla and Microsoft shares.  
-(3) Use the `gather()` function to create a new data frame, with 3 variables: date, company and stock_closing. You should see something similar than below.
+## Appending data
 
-Solution:
-```{r echo=FALSE}
-stock_df <- read_csv("https://www.dropbox.com/s/xws0hwat50pq62r/stock_data.csv?dl=1")
-
-
-
-head(stock_df, 5)
-
-
-stock_tidy <- stock_df %>% 
-    gather("TSLA.Close", "MSFT.Close", key = "company", value = "stock_closing")
-
-
-
-glimpse(stock_tidy)
-
-head(stock_tidy)
-
-unique(stock_tidy$company)
-```
-
-> (4) As a refresher, use the `group_by()` and `summarise()` functions to see the minimum, maximum and mean closing prices for the two company. Use the ` %>% ` pipe operator! You should get something similar as below.
-
-solution:
-```{r echo=FALSE}
-stock_tidy %>% 
-    group_by(company) %>% 
-    summarise(min = min(stock_closing), max = max(stock_closing), mean = mean(stock_closing))
-```
-
-> (5) Finally, use `ggplot2` to visualise the closing prices of the two company. Use the `geom_line()`! You should get a similar plot as below.
-
-solution:
-```{r echo=FALSE}
-p_stock <- ggplot(stock_tidy,
-                  aes(date, stock_closing,
-                      color = company))
-
-p_stock +
-    geom_line() +
-    labs(x = "", y = "Prices (USD)",
-         title = "Closing daily prices for MSFT and TSLA",
-         subtitle = "Data from 2016-01-10 to 2018-01-10",
-         caption = "source: Yahoo Finance")
-    
-```
-
-
-
-## 2.2 Data merging and splitting
-
-While working with data, you rarely have the luxury to have all the data you need in one place. Let's recreate our previous data frame (this is one way of merging two vectors as well).
+While working with data, you rarely have the luxury to have all the data you need in one place. Let's recreate our previous data frame.
 
 ```{r}
 country <- c("Thailand", "Norway", "Colombia", "Canada", "Slovenia", "France")
@@ -234,7 +186,7 @@ pop <- c(68.7, 5.2, 47.8, 35.8, 2, 63.6)
 df1 <- data.frame(country, pop)
 ```
 
-It just so happens that we now have data on their inflation and GDP growth. 
+It just so happens that we now have data on their inflation and GDP growth. Let's simulate this data with the `runif` function. We want to extend our existing dataframe by adding the two new variable to it.
 
 ```{r}
 v1 <- runif(n = 6, min = 1, max = 3) # we use the runif() function to sample from a uniform distribution
@@ -251,7 +203,7 @@ df2 <- df1 %>%
 df2
 ```
 
-If we have more observations (rows) we can slap them onto our dataframe as well.
+If we have more observations (rows) we can slap them onto our dataframe as well. For this, we have a smaller dataframe, which contains the same variables, but with two different countries.
 
 ```{r}
 df3 <- data.frame(
@@ -271,32 +223,10 @@ df2 %>% bind_rows(df3)
 ```
 
 
-> Quick excercise:  
-(1) load additional data from "https://www.dropbox.com/s/7jzdu4zgrvdezay/stock_data2.csv?dl=1" and perform the same reshaping with the `gather()` function as before.  
-(2) then use `bind_rows()` to add the two new company to the previous `stock_tidy` data frame, by creating a new data frame, called `stock_tidy2`.  
-(3) Use the %>% to pipe together your steps. You can use the `unique()` function to check how many unique value you have in a given column.
-
-Solution:
-```{r echo=FALSE}
-stock_tidy2 <- read_csv("https://www.dropbox.com/s/7jzdu4zgrvdezay/stock_data2.csv?dl=1")
-
-stock_tidy2 <- stock_tidy2 %>% 
-    gather("AAPL.Close", "F.Close", key = "company", value = "stock_closing") %>% 
-    bind_rows(stock_tidy)
-
-unique(stock_tidy2$company)
-```
-
-```{r collapse=FALSE}
-head(stock_tidy2, 5)
-
-unique(stock_tidy2$company)
-```
-
 The corresponding `base R` commands are `cbind()` and `rbind()`.
 
-# 3. quick detour: `base R` indexing and subsetting
-(This section was adopted from Martin Mölder's last year course)
+# Quick detour: `base R` indexing and subsetting
+(This section was adopted from [Martin Mölder](https://martinmolder.com/)'s 2017 course)
 
 We have covered some parts of it already, but (if time permits) this section will give a short rundown of how to split datasets with `base R` indexing. While I think the `dplyr` approach that we will be using after this is more straightforward it is useful to at least know that there are multiple ways to access/subset/split datasets. Many online help that you'll see will either use the `dplyr` or the `base` approach and it is helpful if you can reverse engineer it.
 
@@ -315,8 +245,6 @@ df2[c(1,3),]
 ```
 
 
-
-
 For splitting databases based on some conditions, let's remember our logical operators from before. Let's select all of the countries which are above 30 million in population. First, let's check how many values meet this criteria.
 
 ```{r}
@@ -329,7 +257,7 @@ This will give as a vector of logical values that has the same length as we have
 df2[df2$pop > 30, ]
 ```
 
-We can apply this conditional logic to selecting columns as well. We use the `|` OR operator.
+We can apply this conditional logic to selecting columns as well. We use the `|` (OR) operator.
 
 ```{r collapse=FALSE}
 names(df2) == "pop"
