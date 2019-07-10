@@ -35,13 +35,13 @@ You can get the fully functional free version from here: [https://www.rstudio.co
 **Day 1** (Friday 26 July 13:00–15:00 and 15:30–18:00)
 
 1. Intro to R - [notebook](https://aakosm.github.io/R_Basics_ECPR/01_intro/01_intro.html)
-2. Importing, exporting and exploring data - [notebook](https://aakosm.github.io/R_Basics_ECPR/02_data_exploration/02_data_import.html)
-3. Data wrangling pt.1 
-4. Data wrangling pt.2 
+2. Importing, exporting and exploring data - [notebook](https://aakosm.github.io/R_Basics_ECPR/02_data_exploration/02_data_exploration.html)
+3. Data wrangling pt.1 - [notebook](https://aakosm.github.io/R_Basics_ECPR/03_data_wrangling1/03_data_wrangling.html)
+4. Data wrangling pt.2 - [notebook](https://aakosm.github.io/R_Basics_ECPR/04_data_wrangling2/04_data_wrangling2.html)
 
 **Day2** (Saturday 27 July 09:00–12:30 and 14:00–17:30)
 
-5. Data visualization with `ggplot2` 
-6. Writing functions and iterating in R 
-7. Some statistics (linear regression, hypothesis testing) 
-8. Intro to Rmarkdown 
+5. Data visualization with `ggplot2` - [notebook](https://aakosm.github.io/R_Basics_ECPR/05_ggplot2/05_ggplot2.html)
+6. Writing functions and iterating in R - [wip]
+7. Some statistics (linear regression, hypothesis testing) - [wip]
+8. Intro to Rmarkdown - [wip]
