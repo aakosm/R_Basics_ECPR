@@ -1,6 +1,6 @@
 ---
-title: "Session Two"
-subtitle: "Importing and Exploring Data in R"
+title: "Importing and Exploring Data in R"
+subtitle: "Session Two"
 author: "Akos Mate"
 date: '2019 July'
 output:
@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 
 > Main packages used: `haven`, `readxl`, `readr`   
-> Main functions covered: `readr::read_csv`, `readxl::read_excel`, `haven::read_stata` `read_spss`, `read_sas`, `write.table()`  
+> Main functions covered: `readr::read_csv`, `readxl::read_excel`, `haven::read_stata` `haven::read_spss`, `haven::read_sas`, `write.table()`  
 > Supplementary resources: [Data import cheat sheet](https://ugoproto.github.io/ugo_r_doc/data-import.pdf), [R packages for statistical data sets](https://ikashnitsky.github.io/2017/data-acquisition-two/)    
 
 # Importing data into R

@@ -1,6 +1,6 @@
 ---
-title: "Session One"
-subtitle: "A Gentle Introduction"
+title: "A Gentle Introduction"
+subtitle: "Session One"
 author: "Akos Mate"
 date: '2019 July'
 output:
@@ -31,6 +31,9 @@ knitr::opts_chunk$set(echo = TRUE,
 > **Contact info** <br> 
 > Akos: aakos.mate@gmail.com <br>
 > Daniel: Kovarek_Daniel@phd.ceu.edu
+> **Course info and materials** <br>
+> [https://aakosm.github.io/R_Basics_ECPR/](https://aakosm.github.io/R_Basics_ECPR/)
+> [https://ceulearning.ceu.edu/course/view.php?id=9930](https://ceulearning.ceu.edu/course/view.php?id=9930)
 
 ## What is R
 

@@ -1,6 +1,6 @@
 ---
-title: "Session Three"
-subtitle: "Transforming and wrangling data 1/2"
+title: "Transforming and wrangling data 1/2"
+subtitle: "Session Three"
 author: "Akos Mate"
 date: '2019 July'
 output:

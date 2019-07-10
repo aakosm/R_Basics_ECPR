@@ -1,7 +1,7 @@
 ---
-title: "Session Four"
+title: "Transforming and wrangling data 2/2"
 author: "Akos Mate"
-subtitle: "Transforming and wrangling data 2/2"
+subtitle: "Session Four"
 date: '2019 July'
 output:
     html_document:
@@ -258,7 +258,7 @@ head(gdp, 5)
 
 
 
-## 1.4 Joining data frames
+## Joining data frames
 
 (All figures and examples in this section are from the [R for Data Science ch13](http://r4ds.had.co.nz/relational-data.html))
 
@@ -275,7 +275,7 @@ y <- data.frame(id = c(1,2,4),
 ```
 
 
-### 1.4.1 Inner join
+### Inner join
 
 This join uses the key to match every value to its matching key. If there are no match for a row it will get dropped during the join. This means that you can lose observations when you join two data frame this way!
 
@@ -289,7 +289,7 @@ x %>%
 ```
 
 
-### 1.4.2 left/right/full join
+### Left/right/full join
 
 If you want to preserve all your observations you can use:
 
@@ -320,7 +320,7 @@ gapminder_df %>%
 
 
 
-# 2. Dealing with missing data
+# Dealing with missing data
 
 For this, we'll use a data set with sleep data on mammals. Notice the `NA`s in the summary.
 
