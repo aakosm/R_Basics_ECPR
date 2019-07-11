@@ -185,17 +185,21 @@ The YAML header for this document looks like this:
 ---
 title: "Working with RMarkdown"
 author: "Akos Mate"
-subtitle: "PERG workshop"
-date: '2019 January'
+subtitle: "Session Eight"
+date: '2019 July'
 output:
     html_document:
+        code_folding: "show"
+        number_sections: TRUE
         toc: true
-        toc_depth: 3
+        toc_depth: 4
         toc_float: true
-        theme: readable
-        css: style.css
+        theme: flatly
+        highlight: tango
+        css: ../rmd_style.css
 bibliography: mybib.bib
 ---
+
 
 
 ````
@@ -359,7 +363,9 @@ An alternative package for both the html and LaTeX output is `xtable`, which hav
 
 # Example document with various R output
 
-A quick example of what a possible article written in RMarkdown looks like is here: [https://github.com/aakosm/rmarkdown_workshop/blob/master/rmd_example/ex2.pdf](https://github.com/aakosm/rmarkdown_workshop/blob/master/rmd_example/ex2.pdf) The example article is based on the post of [Kieran Healy: Plain text, papers, pandoc](https://kieranhealy.org/blog/archives/2014/01/23/plain-text/) (click if you
+A quick example of what a possible article written in RMarkdown looks like is here: [https://github.com/aakosm/R_Basics_ECPR/blob/master/08_rmarkdown/rmd_example/ex2.pdf](https://github.com/aakosm/R_Basics_ECPR/blob/master/08_rmarkdown/rmd_example/ex2.pdf) 
+
+The example article is based on the post of [Kieran Healy: Plain text, papers, pandoc](https://kieranhealy.org/blog/archives/2014/01/23/plain-text/) (click if you
 want to dig deeper).
 
 

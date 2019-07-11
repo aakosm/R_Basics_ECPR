@@ -1862,17 +1862,21 @@ ordered lists
 ---
 title: &quot;Working with RMarkdown&quot;
 author: &quot;Akos Mate&quot;
-subtitle: &quot;PERG workshop&quot;
-date: &#39;2019 January&#39;
+subtitle: &quot;Session Eight&quot;
+date: &#39;2019 July&#39;
 output:
     html_document:
+        code_folding: &quot;show&quot;
+        number_sections: TRUE
         toc: true
-        toc_depth: 3
+        toc_depth: 4
         toc_float: true
-        theme: readable
-        css: style.css
+        theme: flatly
+        highlight: tango
+        css: ../rmd_style.css
 bibliography: mybib.bib
 ---
+
 
 </code></pre>
 <p>Most of the things are self explanatory (such as title, author, etc.), but there are some options under <code>output</code> that are worth exploring. You should also mind the indentation of the header elements, because it matters!</p>
@@ -2497,7 +2501,7 @@ F Statistic
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">stargazer</span>(m2, <span class="dt">title =</span> <span class="st">&quot;Regression result&quot;</span>, <span class="dt">dep.var.labels =</span> <span class="st">&quot;Ozone levels&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;latex&quot;</span>)</a>
 <a class="sourceLine" id="cb18-2" title="2"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb18-3" title="3"><span class="co">#&gt; % Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu</span></a>
-<a class="sourceLine" id="cb18-4" title="4"><span class="co">#&gt; % Date and time: Cs, júl. 11, 2019 - 14:23:24</span></a>
+<a class="sourceLine" id="cb18-4" title="4"><span class="co">#&gt; % Date and time: Cs, júl. 11, 2019 - 14:29:21</span></a>
 <a class="sourceLine" id="cb18-5" title="5"><span class="co">#&gt; \begin{table}[!htbp] \centering </span></a>
 <a class="sourceLine" id="cb18-6" title="6"><span class="co">#&gt;   \caption{Regression result} </span></a>
 <a class="sourceLine" id="cb18-7" title="7"><span class="co">#&gt;   \label{} </span></a>
@@ -2536,7 +2540,8 @@ F Statistic
 </div>
 <div id="example-document-with-various-r-output" class="section level1">
 <h1><span class="header-section-number">2</span> Example document with various R output</h1>
-<p>A quick example of what a possible article written in RMarkdown looks like is here: <a href="https://github.com/aakosm/rmarkdown_workshop/blob/master/rmd_example/ex2.pdf">https://github.com/aakosm/rmarkdown_workshop/blob/master/rmd_example/ex2.pdf</a> The example article is based on the post of <a href="https://kieranhealy.org/blog/archives/2014/01/23/plain-text/">Kieran Healy: Plain text, papers, pandoc</a> (click if you want to dig deeper).</p>
+<p>A quick example of what a possible article written in RMarkdown looks like is here: <a href="https://github.com/aakosm/R_Basics_ECPR/blob/master/08_rmarkdown/rmd_example/ex2.pdf">https://github.com/aakosm/R_Basics_ECPR/blob/master/08_rmarkdown/rmd_example/ex2.pdf</a></p>
+<p>The example article is based on the post of <a href="https://kieranhealy.org/blog/archives/2014/01/23/plain-text/">Kieran Healy: Plain text, papers, pandoc</a> (click if you want to dig deeper).</p>
 <p>The source for that document is in the Github repository “/rmd_example/ex2.rmd”, but for posterity, here is the rmd source (note: you will need the mybib.bib for it to run, which is also in the same folder)</p>
 <pre><code>#&gt; ---
 #&gt; title: &quot;Insightful paper example&quot;
