@@ -1,6 +1,13 @@
 # R Basics - An intro course for everything R
 
+- [R Basics - An intro course for everything R](#R-Basics---An-intro-course-for-everything-R)
+  - [Brief description](#Brief-description)
+  - [How to install R and RStudio](#How-to-install-R-and-RStudio)
+    - [Download and install R](#Download-and-install-R)
+    - [Download and install RStudio](#Download-and-install-RStudio)
+  - [Course outline and links to notebooks](#Course-outline-and-links-to-notebooks)
 
+## Brief description
 This is an introductory course for R, taught at the [ECPR Summer School 2019](https://ecpr.eu/Events/131). For the details on this course please see the [syllabus](https://github.com/aakosm/R_Basics_ECPR/blob/master/syllabus.pdf) and the [course's ECPR webpage](https://ecpr.eu/Events/PanelDetails.aspx?PanelID=8411&EventID=131). The course repository is here: [https://github.com/aakosm/R_Basics_ECPR](https://github.com/aakosm/R_Basics_ECPR) which contains all the materials and source codes for the notebooks used during the course.
 
 The course is also available as a GitHub Page here if you want less clutter: [https://aakosm.github.io/R_Basics_ECPR/](https://aakosm.github.io/R_Basics_ECPR/)
