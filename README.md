@@ -42,6 +42,6 @@ You can get the fully functional free version from here: [https://www.rstudio.co
 **Day2** (Saturday 27 July 09:00–12:30 and 14:00–17:30)
 
 5. Data visualization with `ggplot2` - [notebook](https://aakosm.github.io/R_Basics_ECPR/05_ggplot2/05_ggplot2.html)
-6. Writing functions and iterating in R - [wip]
-7. Some statistics (linear regression, hypothesis testing) - [wip]
-8. Intro to Rmarkdown - [wip]
+6. Writing functions and iterating in R - [notebook](https://aakosm.github.io/R_Basics_ECPR/06_functions/06_functions.html)
+7. Some statistics (linear regression, hypothesis testing) - [notebook](https://aakosm.github.io/R_Basics_ECPR/07_statistics/07_statistics.html)
+8. Intro to Rmarkdown - [notebook](https://aakosm.github.io/R_Basics_ECPR/08_rmarkdown/08_rmarkdown.html)
