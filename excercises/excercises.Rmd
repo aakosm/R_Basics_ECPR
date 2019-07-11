@@ -1,0 +1,280 @@
+---
+title: "Excercises"
+author: "Mate Akos"
+date: '2019 07 10 '
+output: html_document
+---
+
+# Session 1
+
+# Session 2
+## data exploration
+
+## Plotting
+(adapt these to ggplot)
+> QUICK EXCERCISE: let's plot the distribution of the life expectancy variable (lifeExp) from the gapminder dataset. Use the `xlab` argument to set a meaningful label for the x axis, and use the `main` argument to set a title for the plot (you can set it to `NA` to omit the title). For bonus, try to adjust the y axis to match the tallest bin's height with the `ylim()` argument (discuss how this is related to the `breaks` argument and how can it shape the representation of your data). If you get stuck, remember: `?hist()`
+
+# Session 3
+## reshaping data
+> **Excercise:**  
+(1) load a data set on financial data of Microsoft and Tesla from the `03_data_wrangling1\data` folder from the file `stock_data.csv`.  
+(2) The dataset contains 3 columns: a date and closing prices for Tesla and Microsoft shares.  
+(3) Use the `gather()` function to create a new data frame, with 3 variables: date, company and stock_closing. You should see something similar than below.
+
+Solution:
+```{r echo=FALSE, eval=FALSE}
+stock_df <- read_csv("data/stock_data.csv")
+
+
+
+head(stock_df, 5)
+
+
+stock_tidy <- stock_df %>% 
+    gather("TSLA.Close", "MSFT.Close", key = "company", value = "stock_closing")
+
+
+
+glimpse(stock_tidy)
+
+head(stock_tidy)
+
+unique(stock_tidy$company)
+```
+
+> (4) As a refresher, use the `group_by()` and `summarise()` functions to see the minimum, maximum and mean closing prices for the two company. Use the ` %>% ` pipe operator! You should get something similar as below.
+
+solution:
+```{r echo=FALSE, eval=FALSE}
+stock_tidy %>% 
+    group_by(company) %>% 
+    summarise(min = min(stock_closing), max = max(stock_closing), mean = mean(stock_closing))
+```
+
+> (5) Finally, use `ggplot2` to visualise the closing prices of the two company. Use the `geom_line()`! You should get a similar plot as below.
+
+solution:
+```{r echo=FALSE, eval=FALSE}
+p_stock <- ggplot(stock_tidy,
+                  aes(date, stock_closing,
+                      color = company))
+
+p_stock +
+    geom_line() +
+    labs(x = "", y = "Prices (USD)",
+         title = "Closing daily prices for MSFT and TSLA",
+         subtitle = "Data from 2016-01-10 to 2018-01-10",
+         caption = "source: Yahoo Finance")
+    
+```
+
+
+> Quick excercise:  
+(1) load additional data from `03_data_wrangling1\data` folder's `stock_data2.csv` file and perform the same reshaping with the `gather()` function as during our session.  
+(2) then use `bind_rows()` to add the two new company to the previous `stock_tidy` data frame, by creating a new data frame, called `stock_tidy2`.  
+(3) Use the %>% to pipe together your steps. You can use the `unique()` function to check how many unique value you have in a given column.
+
+Solution:
+```{r echo=FALSE, eval=FALSE}
+stock_tidy2 <- read_csv("https://www.dropbox.com/s/7jzdu4zgrvdezay/stock_data2.csv?dl=1")
+
+stock_tidy2 <- stock_tidy2 %>% 
+    gather("AAPL.Close", "F.Close", key = "company", value = "stock_closing") %>% 
+    bind_rows(stock_tidy)
+
+unique(stock_tidy2$company)
+```
+
+```{r collapse=FALSE, eval=FALSE}
+head(stock_tidy2, 5)
+
+unique(stock_tidy2$company)
+```
+
+
+
+
+
+
+# Session 4
+## dplyr
+> Excercise: Now we work on the iris data we have loaded at the beggining.  
+> (1) check your data, what are the variables, how many observations do we have and what types?  
+> (2) how does the distribution of the variables look like?
+> (3) create a summary table, with the standard deviation of Petal lenght (use the `sd()`), grouped by every species.
+> (4) Select all the variables that start with "Sepal"
+> (5) Create a scatter plot that shows the association between the sepal attributes. The points should be colored by species (use ggplot).
+
+Solution:
+```{r echo=FALSE, eval=FALSE}
+#1
+iris_df <- iris
+
+glimpse(iris_df)
+
+#2
+ggplot(data = iris_df,
+       mapping = aes(x = Petal.Length)) +
+    geom_histogram()
+
+#3
+iris_df %>% 
+    group_by(Species) %>% 
+    summarise(std.dev = sd(Petal.Length))
+
+#4 
+
+iris_sepal <- iris_df %>% 
+    select(starts_with("Sepal")) 
+
+head(iris_sepal)
+
+#5
+ggplot(data = iris_df,
+       mapping = aes(x = Sepal.Width,
+                     y = Sepal.Length,
+                     color = Species)) +
+    geom_point()
+```
+
+## joins
+> Excercise:  
+> (1) install and load the `nycflights13` package
+> (2) load the `flights` and `airlines` data frames into the environment (hint: flights <- flights)
+> (3) check the variables in both data frames and search potential key(s). (hint: you can use the `match()` function on the extracted `names()`)  
+> (4) perform a left join on the data frames using the key.
+
+Solution:
+```{r echo=FALSE, eval=FALSE}
+# 1
+
+# install.packages("nycflights13")
+library(nycflights13)
+
+# 2
+flights <- flights
+airlines <- airlines
+
+# 3
+names_flight <- names(flights)
+names_airlines <- names(airlines)
+
+match(names_airlines, names_flight)
+
+names_airlines
+
+names_flight[10]
+
+# 4
+new_df <- left_join(flights, airlines, by = "carrier")
+
+# or just let the join function handle this headache
+new_df2 <- left_join(flights, airlines)
+```
+
+
+# Session 5
+
+
+
+
+# Session 6
+## loops
+> Excercise: recode gapminder gdp variable to below and above average dummy with a loop. The result should be something similar to below.
+
+solution:
+```{r echo=FALSE}
+gapminder <- gapminder::gapminder
+
+gapminder$gdp <- NA
+gdp_mean <- mean(gapminder$gdpPercap, na.rm = TRUE)
+
+for (i in 1:nrow(gapminder)) {
+    gdp_test <- gapminder$gdpPercap[i] > gdp_mean
+    
+    if (gdp_test) {
+        gapminder$gdp[i] <- "above"
+    } else {
+        gapminder$gdp[i] <- "below"
+    }
+}
+
+
+# let's double check if our loop works correctly. (don't mind the stringr package for now)
+sum((gapminder$gdpPercap) < mean(gapminder$gdpPercap)) == sum(stringr::str_count(gapminder$gdp, "below"))
+
+```
+
+## functions
+> **Quick excercise:** write a function, which standardizes (creates z scores from raw scores) an input vector. The formula for the standardization is: $z=\frac{x-\bar{x}}{S}$  
+> where, $x$ is the raw score (numeric value in our input vector) in our sample; $\bar{x}$ is the sample mean; and $S$ is the sample standard deviation.  
+
+
+Solution:
+```{r echo=FALSE}
+z_score <- function(x, sample) {
+    
+    output <- (x-mean(sample, na.rm = TRUE))/sd(sample, na.rm = TRUE)
+    
+    return(output)
+}
+
+# let's check our function with some random, normally distributed data
+height <- rnorm(50, 0, 1)
+
+z_score(height[1:5], height) # it works! 
+
+```
+
+## apply
+> Quick excercise: Let's calculate the column means of the msleep_num data frame. Use the `apply()` function!  
+> you should get something similar:  
+
+```{r}
+apply(msleep_num, 2, function(x) mean(x, na.rm = TRUE))
+
+```
+
+
+# Session 7
+## t-test
+> Quick excercise: let's load the iris dataset and see if the difference between the petal lenght between the setosa and versicolor are statistically significant or not. Tip: use the previously learned filter() function from dplyr to prep the data. You should get something similar as below. Load the iris data with `data(iris)`. You can turn the scientific notation off with `options(scipen = 999)`.
+
+```{r echo=FALSE}
+iris_t_prep <- iris %>% 
+    filter(Species == c("setosa", "versicolor"))
+
+iris_t <- t.test(Petal.Length~Species, data = iris_t_prep)
+
+options(scipen = 999)
+
+iris_t
+```
+
+## anova
+> Quick excercise: load the `airquality` data from the `survey` package (with `data(airquality)`) and test with anova if the monthly mean temepratures are significantly different from each other. The temperature is `Temp` and the monhts are `Month`. How would you interpret the result?
+
+```{r echo=FALSE}
+data(airquality)
+anova2 <- aov(Temp~Month, data=airquality)
+summary(anova2)
+```
+
+## regression
+> Quick excercise: let's go back to our `gapminder` dataset, filter our observations to the year of 2007 and see what are the effects of the GDP per capita, population and continent on the life expectancy. Load the data:
+
+The result should be something like this. How would you interpret this?
+
+```{r echo=FALSE}
+data(gapminder)
+
+options(scipen = 5)
+
+gap_prep <- gapminder %>% 
+    filter(year == 2007)
+
+reg_gap <- lm(lifeExp ~ gdpPercap + pop + continent,
+          data = gap_prep)
+
+summary(reg_gap)
+```
