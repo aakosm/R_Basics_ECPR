@@ -25,8 +25,13 @@ knitr::opts_chunk$set(echo = TRUE,
 
 
 > Main packages used: `dplyr`   
-> Main functions covered: `filter()`, `select()`, `mutate()`, `*_join()`, `is.na()`   
-> Supplementary resources: [Suzan Baert's blogpost series](https://suzanbaert.netlify.com/2018/01/dplyr-tutorial-1/), [Data Wrangling cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+> Main functions covered: `dplyr::filter()`, `dplyr::select()`, `dplyr::mutate()`, `dplyr::*_join()`, `is.na()`, `tidyr::drop_na()`
+
+
+> **Supplementary resources:**
+>
+> - [Suzan Baert's blogpost series](https://suzanbaert.netlify.com/2018/01/dplyr-tutorial-1/)
+> - [Data Wrangling cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
 
 
 

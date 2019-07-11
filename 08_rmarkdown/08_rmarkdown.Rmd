@@ -24,7 +24,8 @@ knitr::opts_chunk$set(echo = TRUE,
 )
 ```
 
-> Supplementary resources:  
+> **Supplementary resources:**
+>
 > - [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/),    
 > - [R markdown cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf),    
 > - [RStudio: Bibliographies and Citations](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html),    

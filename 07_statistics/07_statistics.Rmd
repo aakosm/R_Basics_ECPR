@@ -24,6 +24,9 @@ knitr::opts_chunk$set(echo = TRUE,
 ```
 
 
+> Main packages used: `base R`, `broom`, `ggplot2` <br>
+> Main functions covered: `t.test`, `cor`, `lm`, `str`, `broom::tidy`, `broom::augment`, `broom::glance`  
+
 # Statistical analysis and modelling in R
 
 

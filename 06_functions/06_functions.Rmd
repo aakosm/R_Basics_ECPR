@@ -24,8 +24,12 @@ knitr::opts_chunk$set(echo = TRUE,
 ```
 
 > Main packages used:`purrr`, `base R`     
-> Main functions covered: `for`, `if`, `else`, `while`, `function(x){}`, `apply`, `lapply` ,`sapply`, `purrr::map`   
-> Supplementary resources: [purrr cheat sheet](https://resources.rstudio.com/rstudio-cheatsheets/purrr-cheat-sheet)
+> Main functions covered: `for`, `if`, `else`, `while`, `function(x){}`, `apply`, `lapply` ,`sapply`, `purrr::map`  
+
+
+> **Supplementary resources:** 
+> 
+> - [purrr cheat sheet](https://resources.rstudio.com/rstudio-cheatsheets/purrr-cheat-sheet)
 
 # Loops
 

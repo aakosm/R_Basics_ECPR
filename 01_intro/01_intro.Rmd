@@ -28,12 +28,17 @@ knitr::opts_chunk$set(echo = TRUE,
 
 # An overview
 
-> **Contact info** <br> 
-> Akos: aakos.mate@gmail.com <br>
-> Daniel: Kovarek_Daniel@phd.ceu.edu
-> **Course info and materials** <br>
-> [https://aakosm.github.io/R_Basics_ECPR/](https://aakosm.github.io/R_Basics_ECPR/)
-> [https://ceulearning.ceu.edu/course/view.php?id=9930](https://ceulearning.ceu.edu/course/view.php?id=9930)
+> **Contact info**
+>
+> - Akos: aakos.mate@gmail.com <br>
+> - Daniel: Kovarek_Daniel@phd.ceu.edu
+
+
+> **Course info and materials**
+>
+> - [https://aakosm.github.io/R_Basics_ECPR/](https://aakosm.github.io/R_Basics_ECPR/)
+> - [https://ceulearning.ceu.edu/course/view.php?id=9930](https://ceulearning.ceu.edu/course/view.php?id=9930)
+> - Syllabus: [https://github.com/aakosm/R_Basics_ECPR/blob/master/syllabus.pdf](https://github.com/aakosm/R_Basics_ECPR/blob/master/syllabus.pdf)
 
 ## What is R
 
@@ -93,7 +98,7 @@ The goals of this course:
 
 
 
-## Course outline and links to notebooks
+## Course outline
 
 **Day 1** (Friday 26 July 13:00–15:00 and 15:30–18:00)
 
@@ -164,8 +169,14 @@ knitr::include_graphics("figures/project_global_options.PNG")
 <br>
 <br>
 
+### Before we move on
+Let's talk about keeping your R and other projects safe from tornadoes, toddlers, toasters or T-rexes. Ideally, your work lives on your (1) hard drive *AND* a (2) back-up hard drive (preferably an SSD) *AND* a (3) cloud service (such as Dropbox, Google Drive, MS OneDrive). 
+
+I would recommend Dropbox as it seems to be the most robust out of these three. It also has file version history, so even if you accidentally delete something can get it back. A big plus for Dropbox and R projects is that they play nice with each other, as opposed to Google Drive and R projects which will annoy you into oblivion with error messages because of writing and reading conflicts. (I swear I don't get commission from Dropbox)
+
 
 > **General tips:**  
+>
 > - Check the [R coding style guide](http://style.tidyverse.org/index.html)  
 > - Comment your codes heavily (with the `#`) because now seemingly straightforward code will not be so in the future  
 > - Use sensible file names (e.g.: `01_data_cleaning.R`)  

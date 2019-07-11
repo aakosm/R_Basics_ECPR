@@ -25,8 +25,12 @@ knitr::opts_chunk$set(echo = TRUE,
 
 
 > Main packages used: `tidyr`, `dplyr`, `base R`     
-> Main functions covered: `tidyr::gather`, `tidyr::spread`, `dplyr::group_by`, `dplyr::summarise`, `dplyr::bind_rows`, `dplyr::bind_cols` ,`runif`, `[`, `[[`    
-> Supplementary resources: [Data Wrangling cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+> Main functions covered: `tidyr::gather`, `tidyr::spread`, `dplyr::group_by`, `dplyr::summarise`, `dplyr::bind_rows`, `dplyr::bind_cols` ,`runif`, `[`, `[[`  
+
+
+> **Supplementary resources:**
+>
+> - [Data Wrangling cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
 
 # Tidyverse overview
 
