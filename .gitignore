@@ -31,3 +31,5 @@ admin_things
 *.Rproj
 syllabus.md
 .vscode/settings.json
+desktop.ini
+.dropbox
