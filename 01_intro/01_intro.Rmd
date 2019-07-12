@@ -47,7 +47,7 @@ R is an open source programming language that is extremely versatile and rapidly
 <br>
 <br>
 
-```{r, out.width = "450px", echo=FALSE, fig.align='center'}
+```{r out.width = "450px", echo=FALSE, fig.align='center'}
 knitr::include_graphics("figures/learning_curve.jpg")
 ```
 
@@ -68,7 +68,7 @@ knitr::include_graphics("figures/learning_curve.jpg")
 
 **Evidence 1:**
 
-```{r, out.width = "600px", echo=FALSE, fig.cap="",fig.align='center'}
+```{r out.width = "600px", echo=FALSE, fig.cap="",fig.align='center'}
 knitr::include_graphics("figures/r_popularity.png")
 ```
 
@@ -78,7 +78,7 @@ knitr::include_graphics("figures/r_popularity.png")
 
 **Evidence 2:**
 
-```{r, out.width = "600px", echo=FALSE, fig.cap="", fig.align='center'}
+```{r out.width = "600px", echo=FALSE, fig.cap="", fig.align='center'}
 knitr::include_graphics("figures/r_users.png")
 ```
 
@@ -149,7 +149,7 @@ Some tips for using RStudio:
     + You can see the full list of keyboard short-cuts in RStudio, if you press **Alt+Shift+K**
 
 
-```{r, out.width = "600px", echo=FALSE, fig.align='center'}
+```{r out.width = "600px", echo=FALSE, fig.align='center'}
 knitr::include_graphics("figures/rstudio_pane_reorder.PNG")
 ```
 
@@ -162,7 +162,7 @@ How to set one up: `File -> New Project` then choose a directory where you want 
 For more help and materials on using projects, see [RStudio's own resource page](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects) or a [well argued reasoning from Jenny Brian](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/) 
 
 
-```{r, out.width = "600px", echo=FALSE, fig.align='center'}
+```{r out.width = "600px", echo=FALSE, fig.align='center'}
 knitr::include_graphics("figures/project_global_options.PNG")
 ```
 
@@ -189,12 +189,12 @@ It is OK to get stuck in R and look for help. Don't worry if don't remember a fu
 
 <br><br>
 
-```{r, out.width = "500px", echo=FALSE, fig.align='center'}
+```{r out.width = "500px", echo=FALSE, fig.align='center'}
 knitr::include_graphics("figures/peng_twit.png")
 ```
   
   
-```{r, out.width = "300px", echo=FALSE, fig.align='center'}
+```{r out.width = "300px", echo=FALSE, fig.align='center'}
 knitr::include_graphics("figures/peng_prof.png")
 ```    
  
@@ -337,7 +337,7 @@ Objects are essential part of the R workflow. You can see your current objects i
 
 <br>  
 
-```{r, out.width = "600px", echo=FALSE}
+```{r out.width = "600px", echo=FALSE}
 knitr::include_graphics("figures/variable_in_environment.PNG")
 ```
 
@@ -636,7 +636,7 @@ You can access an item in your list by the single bracket operator `[ ]` or the 
 
 > QUICK EXCERCISE: lets select the second item in our list2 with both methods and see what happens. What is the difference?
 
-```{r, collapse=FALSE, echo=FALSE}
+```{r collapse=FALSE, echo=FALSE}
 # single bracket
 list2[2]
 
@@ -665,7 +665,7 @@ typeof(numerics)
 Coercing functions starts with `as.*`, where * marks the datatype. Start typing `as.` in RStudio and see how many functions are suggested with this beggining.
 
 
-##Combining stuff into data frame
+## Combining stuff into data frame
 As promised before, we can weave all the vectors into one data frame. To do this, we use the `data.frame` function. First, we will create some vectors and then do the combination.
 ```{r}
 student <- c("Weber", "Hobbs", "Curie", "Lovelace", "Perlman")
