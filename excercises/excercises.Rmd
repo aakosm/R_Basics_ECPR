@@ -6,9 +6,27 @@ output: html_document
 ---
 
 # Session 1
+## logical
+> QUICK EXCERCISE:  How about when we want to know the proportion of values in the vector `num` that are above a certain value? Use the functions that we have already discussed to calculate this automatically. (let's say 8)
+
+solution:
+```{r echo=FALSE}
+(sum(num > 8))/length(num)
+```
+
+
+## data frame (th)
+Reproduce this
+
+```{r echo=FALSE}
+country <- c("Thailand", "Norway", "North Korea", "Canada", "Slovenia", "France", "Venezuela")
+pop <- c(68.7, 5.2, 24, 47.8, 2, 63.6, 31.6)
+continent <- factor(c("Asia", "Europe", "Asia", "North America", "Europe", "Europe", "South America"), levels = c("Asia", "Europe", "North America", "South America"))
+
+df <- data.frame(country, pop, continent, stringsAsFactors = FALSE)
+```
 
 # Session 2
-## data exploration
 
 ## Plotting
 (adapt these to ggplot)
@@ -68,6 +86,7 @@ p_stock +
     
 ```
 
+## appending data
 
 > Quick excercise:  
 (1) load additional data from `03_data_wrangling1\data` folder's `stock_data2.csv` file and perform the same reshaping with the `gather()` function as during our session.  
@@ -123,7 +142,6 @@ iris_df %>%
     summarise(std.dev = sd(Petal.Length))
 
 #4 
-
 iris_sepal <- iris_df %>% 
     select(starts_with("Sepal")) 
 
