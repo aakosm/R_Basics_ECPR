@@ -31,6 +31,11 @@ knitr::opts_chunk$set(echo = TRUE,
 > 
 > - [purrr cheat sheet](https://resources.rstudio.com/rstudio-cheatsheets/purrr-cheat-sheet)
 
+```{r eval=FALSE}
+install.packages("purrr")
+```
+
+
 # Loops
 
 This session focuses on ways to save time and keystrokes: writing functions and iterations. As a rule of thumb if you find yourself writing (copying) the same code more than twice then it should be a function or loop. This section will be more focused on base R solutions, so we will write loops, then embed our loops in functions. Then, we will discuss two equivalent to writing loops: the `apply` function family from base R, and the `purrr:map` family from the `tidyverse`.
@@ -88,16 +93,16 @@ msleep_num <- msleep_df %>%
 ```
 
 
-We want to compute the mean for every column. Instead of writing out `ms_colmean[1] <- mean(ms_colmean$var, na.rm = TRUE)` 3 times, changing the variable and row index we can write a nice loop in three lines. (imagine if we would have 15 numerical variables, we would still need this three lines of code.)
+We want to compute the mean for every column. Instead of writing out `ms_colmean[1] <- mean(ms_colmean$var, na.rm = TRUE)` 3 times, changing the variable and row index we can write a nice loop in three lines. (imagine if we would have 15 numerical variables, we would still need this three lines of code.) The `sec_along` function defines that we want to loop over the three columns in our data.
 
 ```{r error=TRUE, warning=TRUE}
-ms_colmean <- vector("double", ncol(msleep_num))
-
+ms_colmean <- vector("double", length(msleep_num))
+                     
 for (i in seq_along(msleep_num)) {
     ms_colmean[i] <- mean(msleep_num[i])
 }
-
 ```
+
 
 
 Why did we get an error? (think about the difference between `[` and `[[`)
@@ -111,14 +116,43 @@ msleep_num[2]
 msleep_num[[2]]
 ```
 
-Let's correct out indexing in the loop.
+Let's correct our indexing in the loop.
 ```{r}
+ms_colmean <- vector("double", length(msleep_num))
+
+                     
 for (i in seq_along(msleep_num)) {
     ms_colmean[[i]] <- mean(msleep_num[[i]])
-    print(ms_colmean[i])
+    print(ms_colmean[[i]])
 }
 
 ```
+
+
+If we experience any problems with our loops, let's try deconstructing them piece by piece to understand their building blocks.
+
+First, what are we iterating on? A numerical vector
+```{r}
+seq_along(msleep_num)
+```
+
+Second, what happens inside the loop? We calculate a column mean (first, second, third)
+```{r}
+mean(msleep_num[[1]])
+```
+Third, we are assigning this value to the ms_colmean object (a numerical vector in this case)
+
+```{r}
+ms_colmean[[1]] <- mean(msleep_num[[1]])
+```
+
+Lastly, we print out the assigned value.
+```{r}
+print(ms_colmean[[1]])
+```
+
+And the loop does this whole thing three times in a row.
+
 
 It seems that we still need to get rid of the NA problem. The solution is to use the `na.rm = TRUE` option when we compute the mean.
 
@@ -130,26 +164,21 @@ for (i in seq_along(msleep_num)) {
 ```
 
 
-We used the `seq_along` funtion to define our loop sequence (previously we just went with `1:whatever`). Another common way to define the sequence is the `1:lenght(input)`. In the off chance that you create a vector with 0 lenght however, `seq_along` will display a correct output, while `1:lenght(input)` won't.
-
-```{r}
-zero <- vector("double", 0)
-
-1:length(zero)
-
-# vs
-
-seq_along(zero)
-```
 
 Loops can be nested in each other as well. To demonstrate this, we will do a multiplication table (a `10x10` matrix) with a nested for loop.
 
+First we create an empty matrix that we will populate.
+
 ```{r}
+mult_table <- matrix(NA, nrow = 10, ncol = 10)
 
-# nested loop for a multiplication table
-# right now it is populated by NA's
-(mult_table <- matrix(NA, nrow = 10, ncol = 10))
+mult_table
+```
 
+
+Then we write the loop that populates the empty matrix. We nest a second loop inside the outer one so our numerical vector will create a proper multiplication table at the end.
+
+```{r}
 num1 <- 1:10 # our input vector
 
 for (i in num1) {               
@@ -159,10 +188,14 @@ for (i in num1) {
 }
 
 mult_table
-
 ```
 
+
+
 ## Flow controls
+
+You have to control the Flow, Luke!
+
 ### If, else
 
 It is a conditional statement, which we can put in a for loop if we want.
@@ -176,7 +209,8 @@ Plan B
 
 ```
 
-A quick example(s).
+A quick example(s). 
+First, we adapt our first loop for the `if` conditional statement. It prints out different values depending on if our statement is `TRUE` or `FALSE`.
 
 ```{r}
 x <- 5
@@ -186,11 +220,46 @@ if (x > 5) {
 } else {
     print("this not as great as 5 :(")
 }
+```
 
 
-# a more complicated example using multiple if conditions, where we are curious if the input is even or odd. We also want a nicer output with more communication.
 
-input <- c(1:6)
+A more complicated example using multiple if conditions, where we are curious if the input is even or odd. We also want a nicer output with more communication. Again, let's build the loop step by step!
+
+To achieve this, we modify our loop somewhat. We build in a stop condition, to check if our input is the one that we need. Since we only care about integers, we will put this conditional statement into our loop. The `stop` function will stop the loop from iterating whenever the loop arrives at that point where the `if`  statement is `TRUE` (in this case).
+
+```{r eval=FALSE}
+stop_cond <- is.integer(input)
+     if (!stop_cond) {
+         stop("input must be integer!")
+     } else { rest of our loop}
+```
+
+
+Next we come up with some way to test if a number is even or odd. We will use the `%%` (modulus) operator that returns the remainder from the division, which in case of x/2 should be zero if x is even.
+
+```{r}
+42 %% 2
+
+133 %% 2
+```
+
+The matching conditional would be something like this. In this code, the `cat` functions prints out our number in question and attaches the character string after the comma.
+
+```{r eval=FALSE}
+num_test <- input[i]%%2 == 0 
+         if (num_test) {
+             cat(i, "is even; ")
+         } else {
+             cat(i, "is odd; ")
+         }
+```
+
+
+Finally, we have all the neccesary building blocks, so let's put our loop together!
+
+```{r}
+input <- c(1:7)
 
 for (i in seq_along(input)){
      stop_cond <- is.integer(input)
@@ -206,6 +275,27 @@ for (i in seq_along(input)){
      }
  }
 ```
+
+Our error message is also working as intended!
+
+```{r error=TRUE}
+input <- c(1.5, 2, 4)
+
+for (i in seq_along(input)){
+     stop_cond <- is.integer(input)
+     if (!stop_cond) {
+         stop("input must be integer!") # given the nature of our test condition, this only works on integers
+     } else {
+         num_test <- input[i]%%2 == 0 # the `%%` operator returns the modulus. if 0 then even, if not, odd.
+         if (num_test) {
+             cat(i, "is even; ") # cat is a more flexible print function, which can combine objects and strings
+         } else {
+             cat(i, "is odd; ")
+         }
+     }
+ }
+```
+
 
 A more practical example on using conditional statement is to recode a variable. We will create a new column in our curtailed msleep_df data frame and fill it with `NA`'s initially. Then we will create a dummy variable, which is 1 if `sleep_value > 1` AND `awake_value > 18` and 0 if this condition is not met.
 
@@ -230,11 +320,36 @@ msleep_df$new_awake
 ```
 
 
+> Quick excercise:
+> Write a loop which takes in a character vector and prints out "IT'S A CAT" if the value of the string is "cat" and "It's not a cat :'(((" whenever the value is not "cat". <br>
+> The result should look something like this for the following input `x <- c("cat", "mouse")`:
+
+```{r echo=FALSE}
+x <- c("cat", "mouse")
+
+
+for (i in 1:length(x)) {
+  is_string <- is.character(x)
+  if (!is_string) {
+    stop("The input needs to be a character vector.")
+  } else {
+    if ((x[[i]] == "cat")) {
+      print("IT'S A CAT")
+    } else {
+      print("Its not a cat :'(((")
+    }
+  }
+}
+```
+
+
 ### While
+
+In each iteration of the loop, the `while` condition must be updated according to a certain logic, and it is evaluated again at the beginning of the next cycle of the loop to decide whether to go through or to stop. 
 
 ```{r eval=FALSE}
 while (condition){
-  # Do whatever is here as long as the condition is TRUE. In each iteration of the loop, the condition much be updated according to a certain logic, and it is evaluated again at the beginning of the loop to decide whether to go through with the next iteration or to stop the loop. 
+  # Do whatever is here as long as the condition is TRUE. 
 }
 ```
 
@@ -328,7 +443,7 @@ It is now time to put our knowledge to good practical use and combine a function
 column_mean <- function(df) {
     output <- vector("double", length(df))
     for (i in seq_along(df)) {
-        output[i] <- round(mean(df[[i]]),2)
+        output[[i]] <- round(mean(df[[i]], na.rm = TRUE),2)
     }
     
     return(output)
@@ -343,7 +458,7 @@ If we want to have a more general summary function, we can supply a function as 
 col_summary <- function(df, fun) {
   out <- vector("double", length(df))
   for (i in seq_along(df)) {
-    out[i] <- fun(df[[i]])
+    out[[i]] <- fun(df[[i]], na.rm = TRUE)
   }
   return(out)
 }
