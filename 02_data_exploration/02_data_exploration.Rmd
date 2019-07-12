@@ -108,15 +108,6 @@ Next we are loading the excel file. We use the `readxl` package's `read_excel` f
 qog_excel <- read_excel("data/qog_bas_cs_jan18.xlsx")
 ```
 
-> QUICK EXCERCISE: read the help of the `read_excel` function and import in data to a new object where only the first 5 columns are imported.  
-
-Solution:
-```{r echo=FALSE}
-qog_ex <- read_excel("data/qog_bas_cs_jan18.xlsx", range = "A1:E195")
-
-qog_ex
-```
-
 
 ### Stata (.dta) SPSS (.sav), and SAS (.sas7bdat)
 
@@ -159,6 +150,16 @@ There are loads of ways to load data to R via APIs, from various sources. This s
 install.packages("devtools")
 devtools::install_github("WIDworld/wid-r-tool")
 library(wid)
+```
+
+
+> QUICK EXCERCISE: read the help of the `read_excel` function and import in data to a new object where only the first 5 columns are imported.  
+
+Solution:
+```{r echo=FALSE}
+qog_ex <- read_excel("data/qog_bas_cs_jan18.xlsx", range = "A1:E195")
+
+qog_ex
 ```
 
 
@@ -268,10 +269,17 @@ knitr::include_graphics("figures/most_used_package.png")
 [https://stackoverflow.blog/2017/10/10/impressive-growth-r/](*Source: Stack Overflow blog*)
 
 
-
+### The pipe operator
 One key advantage of the `tidyverse` packages is their compatibility with the use of the pipe operator: `%>%` (shortcut: Ctrl + Shift + M). It combines code and makes it more intuitive to work with data. Think of the ` %>% ` as a "then". This is just a short intro, so don't worry if this might be confusing. We will be using `dplyr` and other `tidyverse` packages a lot so you'll have enough time to get comfortable. For every "tidy" function and solution, there exists a base R or other package so if you find something unintuitive or problematic, you can have alternative solutions if you search for it.
 
 The `%>%` essentially pipes the data on it's left as the first argument for function after it.
+
+
+> Quick excercise: Replicate the below code with using the pipe operator
+
+```{r eval=FALSE}
+# dani :)
+```
 
 
 In our first step, we group our data by continent and then create a summary variable, that tells us the mean GDP for each continent. Check the code snippet below to see the role of each line.
