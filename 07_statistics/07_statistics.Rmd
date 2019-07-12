@@ -30,14 +30,29 @@ knitr::opts_chunk$set(echo = TRUE,
 # Statistical analysis and modelling in R
 
 
-```{r}
+Packages we will need.
+
+```{r eval=FALSE}
+packages_s7 <- c("ggfortify", "effects", "GGally", "broom")
+
+install.packages(packages_s7)
+```
+
+```{r echo=FALSE}
+library(survey) # package for analyzing survey data
+library(plm) # package for panel regressions
+```
+
+
+```{r message=FALSE}
 # data import and cleaning
+library(readr)
 library(dplyr)
 library(haven)
 
 # statistical modelling
-library(survey) # package for analyzing survey data
-library(plm) # package for panel regressions
+# library(survey) # package for analyzing survey data
+# library(plm) # package for panel regressions
 library(broom) # extracting model informations
 
 
@@ -46,10 +61,71 @@ library(gapminder)
 
 # data visualization
 library(ggplot2)
+library(ggfortify)
+library(effects)
+library(GGally)
 
 ```
 
-Before we delve into this session we are going to use the `airquality` data from the `survey` package. Let's load it and look around.
+
+
+
+
+## Student's t-test
+
+The t-test is a simple, yet powerful statistical technique to check whether two sample means differ from each other statistically significantly. For experimental setups you can examine if your treatment caused a statistically significant effect compared to your control group for example. The validity of the test is based on the assumptions that our sample is randomly selected from the population and people are randomly distributed between the treatment and control groups as well.
+
+Let’s look at the survey data of the European Social Survey. The data file is familiar from before as we used it for some data visualization excercises. It contains a select few variables from the Hungarian survey.
+
+
+```{r}
+ess_data <- read_csv("data/ESS_Hun_7.csv")
+
+glimpse(ess_data)
+
+```
+
+Let's further trim the dataset, so we only have what we need right now. We will also eliminate the "No Response", "Don't Know" codes, by filtering these values out. Note: in a real analysis these still carry information, but for us they would pose needless complications. We also create a factor variable from the gender one, by specifying the levels and corresponding labels.
+
+```{r}
+ess_sample <- ess_data %>%
+    select(cntry, tvpol:gndr) %>% 
+    filter(tvpol < 66, polintr < 7, trstlgl < 11, gndr < 3) %>% 
+    mutate(gndr = factor(gndr, levels = c(1,2), labels = c("male", "female")))
+
+glimpse(ess_sample)
+```
+
+
+```{r}
+tv_test <- t.test(tvpol ~ gndr, data = ess_sample)
+
+tv_test
+```
+
+We will use the `gndr` dummy variable (takes the binary values of female or male) and check if the female and male respondents differ in their political interest in a statistically significant way. The `t.test()` function implements the independent samples t-test, where we have two distinct group and we want to know if their group means are different from each other. There are other variants of the t-test, such as the one-sample t-test, the paired samples t-test, but here we are focusing on the independent samples t-test.
+
+In R a t-test is implemented in the `t.test()` function. As a minimum, for an independent samples t-test, you just need to provide it with two vectors of data values as the first two arguments. It also accepts input in the form of a formula, which might be more convenient in some occasions. 
+
+In general R, the `formula = ` argument is made up by a right hand side (our dependent variable usually), which is followed by `~` and the independent variables. For the t-test, we can simply specify `sample1~sample2` as our formula and supply the function with the `data = ` argument. This way, we don't need to specify the variable names by using `$`. The variable formula is used widely in R modelling and statistical analysis functions, so we should get acquinted with it.
+
+So let’s see if men and women differ in political interest. Let’s put the results of the test into an object called `polintr_test` and print them by just calling the name of the object.
+
+```{r}
+polintr_test <- t.test(polintr ~ gndr, data = ess_sample)
+
+polintr_test
+```
+
+
+In the output we can see the value of the test statistic t = -4.7959 and the p-value = 0.2564. These are the two most important pieces of information. If the p-value of the test statistic is below a certain threshold that we have set (usually 0.05), then we can reject the null hypothesis and accept the alternative hypothesis that the true difference in means is not equal to 0 (the null hypothesis is that the difference between the sample means is 0). We can also see the confidence interval and the means for the two groups. In this case there is a statistically significant difference between the two sex about their political interest.
+
+
+## ANOVA (OPTIONAL)
+
+If we are curious about the difference between more than two sample means, we can use the Analysis of Variance test.  The following is a simple one-way analysis of variance – with one response variable and one explanatory variable. There are many other versions of ANOVA, that we will not have the chance to look at here.
+
+We are going to use the `airquality` data from the `survey` package. Let's load it and look around.
 
 ```{r}
 data(airquality)
@@ -59,63 +135,13 @@ data(airquality)
 glimpse(airquality)
 ```
 
-And do the same for the `survey` data from the `MASS` package. (I know it's confusing naming, I'm sorry)
 
-```{r}
-survey <- MASS::survey
+Anova is implemented in R with the `aov()` function and at its simplest the usage is the same as for the t-test function. We have to define the formula and tell the function which data object to use. Let's expand on our previous excercise by using the iris data. We would perform ANOVA and display the results of the analysis with the `summary()` function like this.
 
-glimpse(survey)
-```
-
-
-
-## T-test
-
-The T-test is a simple, yet powerful statistical technique to check whether two sample means differ from each other statistically significantly. For experimental setups you can examine if your treatment caused a statistically significant effect compared to your control group for example. The validity of the test is based on the assumptions that our sample is randomly selected from the population and people are randomly distributed between the treatment and control groups as well.
-
-Let’s look at the survey data set about the intro to stats students from the University of Adelaide from the `MASS` package:
-
-```{r}
-data(survey)
-
-glimpse(survey)
-```
-
-We will use the `Sex` dummy variable (takes the binary values of female or male) and check if the female and male students differ in their pulse or in their height in a statistically significant way. The `t.test()` function implements the independent samples t-test, where we have two distinct group and we want to know if their group means are different from each other. There are other variants of the t-test, such as the one-sample t-test, the paired samples t-test, but here we are focusing on the independent samples t-test.
-
-In R a t-test is implemented in the `t.test()` function. As a minimum, for an independent samples t-test, you just need to provide it with two vectors of data values as the first two arguments. It also accepts input in the form of a formula, which might be more convenient in some occasions. 
-
-In general R, the `formula = ` argument is made up by a right hand side (our dependent variable usually), which is followed by `~` and the independent variables. For the t-test, we can simply specify `sample1~sample2` as our formula and supply the function with the `data = ` argument. This way, we don't need to specify the variable names by using `$`. The variable formula is used widely in R modelling and statistical analysis functions, so we should get acquinted with it.
-
-So let’s see if men and women differ in pulse. Let’s put the results of the test into an object called `ttest1` and print them by just calling the name of the object.
-
-```{r}
-ttest1 <- t.test(Pulse~Sex, data=survey)
-ttest1
-```
-
-
-In the output we can see the value of the test statistic t = 1.1384 and the confidence value p-value = 0.2564. These are the two most important pieces of information. If the p-value of the test statistic is below a certain threshold that we have set (usually 0.05), then we can reject the null hypothesis and accept the alternative hypothesis that the true difference in means is not equal to 0 (the null hypothesis is that the difference between the sample means is 0). We can also see the confidence interval and the means for the two groups. In this case there is no difference between men and women in terms of their pulse. But how about their height?
-
-```{r}
-ttest2 <- t.test(Height~Sex, data=survey)
-ttest2
-```
-
-In this case we can see that the p-value of the test statistic is way below 0.05 and the confidence interval is very far from containing 0. We can be sure that the difference in height between men and women is large enough that it could not have arisen simply as a chance result of our analysis. And in this case it is a substantively large difference as well – men are more than 10 cm higher than women on average.
-
-
-
-## ANOVA (OPTIONAL)
-
-If we are curious about the difference between more than two sample means, we can use the Analysis of Variance test.  The following is a simple one-way analysis of variance – with one response variable and one explanatory variable. There are many other versions of ANOVA, that we will not have the chance to look at here.
-
-Anova is implemented in R with the `aov()` function and at its simplest the usage is the same as for the t-test function. We have to define the formula and tell the function which data object to use. Let's expand on our previous excercise by using the iris data. We would perform ANOVA and display the results of the analysis with the `summary()` function like this:
 
 
 ```{r}
-
-anova1 <- aov(Sepal.Width~Species, data=iris)
+anova1 <- aov(Temp ~ Month, data=airquality)
 
 anova1
 
@@ -148,43 +174,71 @@ ggplot(data = anova_sum,
 
 Perhaps the most common approach to look into associations between variables is the correlation. There are also different types of correlation, here we will be talking about the Pearson correlation, which is what is usually thought of when people speak about correlation. It shows the association between two continuous variables and is implemented in R in the `cor()` and `cor.test()` functions. The first simply calculates the value of the correlation coefficient, the second also performs a statistical test to tell you if the correlation is statistically different from 0.
 
-The `cor()` function is useful, because it provides the possibility to look at many variables at once. So let’s have a look at all the correlations between the variables in the airquality dataset.
+We will use the, by now, well known gapminder dataset for both the correlation and both the regression analysis examples. The only modifications we will make to the data is to create a cross-section of it, by limiting all observations to the year 2007.
 
 ```{r}
-cor(airquality[,1:4], use="pairwise.complete")
+gapminder_cs <- gapminder %>% 
+    filter(year == 2007)
+
+
+glimpse(gapminder_cs)
 
 ```
 
-The `cor()` function is picky about missing data and therefore we have to tell it to drop the cases with missing values on a variable for the calculation of a specific correlation. The `"pairwise.complete"` option tells it to use for each correlation the set of observations that complete.
+The `cor()` function is useful, because it provides the possibility to look at many variables at once. So let’s have a look at all the correlations between the variables in the dataset. The `cor()` function is picky about missing data and therefore we have to tell it to drop the cases with missing values on a variable for the calculation of a specific correlation. The `"pairwise.complete"` option tells it to use for each correlation the set of observations that complete.
 
-We can see that most of the correlations are notable and it only seems that there is no association between Wind and Solar. Let’s also preform a test on this and some of the other correlations.
+In the function call, I specify that I want the correlation between the last three variables.
+
+```{r}
+cor(gapminder_cs[, 4:6], use = "pairwise.complete", method = "pearson")
+```
+
+
+
+We can test with the `cor.test` function if the estimated correlations are statistically significant. Let's check GDP per capita and population. They have a negative correlation, but we do not really know if this is significant or not. (yet)
 
 ```{r, collapse=FALSE}
-cor1 <- cor.test(airquality$Wind, airquality$Solar.R)
-cor1
+cor1 <- cor.test(gapminder_cs$pop, gapminder_cs$gdpPercap, method = "pearson")
 
-cor2 <- cor.test(airquality$Wind, airquality$Ozone)
-cor2
+cor1
 ```
 
-We can see that the correlation between Wind and Ozone (-0.60) is clearly significant. The correlation between Wind and Solar.R, however, is far from being statistically significant as the confidence interval spans comfortably across 0.
+The p-value of the test is above our treshold of p < 0.05, thus the negative correlation between the two variable is not statistically significant. 
+
+
+Let's check life expectancy and GDP per capita.
+
+```{r}
+cor.test(gapminder_cs$lifeExp, gapminder_cs$gdpPercap)
+```
+
+
+
+Is p-value < 2.2e-16 small or large? Let's make sure that we avoid scientific notation in our output with the following option:
+
+```{r}
+options(scipen = 999)
+
+cor.test(gapminder_cs$lifeExp, gapminder_cs$gdpPercap)
+```
+
+
+We can see that the correlation between the variables is clearly significant as the p-value is well below our trehsold of p < 0.05.
 
 We can visualise correlation with scatter plots. 
 
-> Quick excercise: plot the relationship between wind and ozone with the `ggplot` package. No need to tinker with the plot this time. For extra, you can add a trend line with the `geom_smooth(method = "lm")`
+> Quick excercise: plot the relationship between life expectancy and GDP per capita with the `ggplot` package. No need to tinker with the plot this time. For extra, you can add a trend line with the `geom_smooth()`
 
 ```{r echo=FALSE}
-ggplot(airquality, aes(Wind, Ozone)) +
+ggplot(gapminder_cs, aes(gdpPercap, lifeExp)) +
     geom_point() +
     geom_smooth(method = "lm")
 ```
 
-Or we can plot a correlation heatmap with the `ggcorr` function of the `GGally` ggplot extension package.
+Or we can plot a correlation heatmap with the `GGally::ggcorr` function of the `GGally` ggplot extension package.
 
 ```{r}
-library(GGally)
-
-ggcorr(airquality[,1:4], label = TRUE)
+ggcorr(gapminder_cs[, 4:6], label = TRUE)
 ```
 
 
@@ -194,59 +248,43 @@ Perhaps the simplest and most common analysis one would do is linear OLS regress
 
 OLS is suitable if one has a continuous response variable, which is more or less normally distributed, continuous or binary explanatory variables and a reasonable amount of cases that are independent of each other. Rules of thumb with regard to the latter differ, but it would probably not be a good idea to run a regression with less than 20 cases, especially with many explanatory variables, and one should be OK if there are more than a 100 cases and not a very large amount of predictors. The more we want out of the data, i.e. the more coefficients and relationships we are looking at, the more information (cases) we would need in order to have stable and valid estimates about the associations we are interested in.
 
-Out of the example data that we have had, let’s try to model the height of a person in the `survey` dataset as a function of the span of the writing hand and gender. This is not such a far fetched example – we know that men are taller than women and we can assume that body proportions like height and the size of hands are related.
+Out of the example data that we have had, let’s try to model the life expectancy in certain countries from the `gapminder` dataset as a function of the GDP per capita, population and spatial features (continent). 
 
 In R a linear model can be fitted with the `lm()` function, which has the same familiar arguments as the previous functions we have looked at in this section. We need to specify a formula with the response variable on the right hand side and the explanatory variables on the left hand side. And we need to tell the function the name of the data object.
 
 ```{r}
-reg1 <- lm(Height ~ Wr.Hnd + Sex, data = survey)
+reg1 <- lm(lifeExp ~ gdpPercap + pop + continent, data = gapminder_cs)
 
 summary(reg1)
-
 ```
 
 The first thing we should always look at is model fit. This is shown us by the two values of R-squared at the bottom of the output. Out of these two, we should always look at adjusted R-squared, because this also takes into account the number of variables we have in the model and the number of cases that we have at our disposal. Any variable, even if there is no association at all, that is included in a model increases model fit a bit just by chance and we should account for that somehow.
 
-Here we can see that the model fits rather well, sex and the size of the hand help us account for about half of the variance in a person’s height. With such a well fitting model, we can safely move on to interpreting the coefficients. They tell us that a 1 centimetre increase in the size of the hand is associated with a 1.6 centimetre increase in the height of a person (this should make us think a bit about the nature of the relationship and its possible limits). And that if you are male, you are on average, and taking into account the size of the hand, about 9.5 centimetres taller than a woman. Note that this is different compared to when we would have only sex as the predictor. This is because we have the size of the hand also in the model. The coefficient for the sex variable this means that after we have considered the differences in height that are associated with difference in hand size, men are still this and this much taller than women.
+Here we can see that the model fits rather well, the included independent variables help us account for 70% of the variance in a country's average population life expectancy. With such a well fitting model, we can safely move on to interpreting the coefficients. They tell us that a 1 dollar per capita increase in the GDP per capita is associated with a 0.00035 increase in life expectancy (this should make us think a bit about the nature of the relationship and its possible limits). 
 
+We can also see that the effect size of the contient variable dwarfs the gdpPercap. This should not be a big surprise, as we cannot really claim to have a fully specified model so the continent variable is likely capturing a lot of other effects.
 
 As in other cases, it might sometimes be better also here to present your results visually. For regressions (and linear models in general) this is made easy with the `effects` package, which can be used to isolate and plot the effect of a single variable together with its confidence intervals. The function `effect()` calculates the effect and takes the name of the variable and the model object as input and the generic `plot()` function can be used to plot the effect. Let’s see how this looks like for the model we just fitted.
 
 ```{r, collapse=FALSE}
-library(effects)
-plot(effect("Wr.Hnd", reg1))
-plot(effect("Sex", reg1))
+plot(effect("gdpPercap", reg1))
+
+plot(effect("continent", reg1))
 ```
 
-
-In the case of a simple model – with no non-linear effects and no interactions – it is rather easy to understand from the regression output what the substantive meaning of the effect is. One unit increase in the IV means a change in the DV that is equal to the coefficient of the IV. With interactions (multiplications of the variables) and non-linear associations (which can be modelled with squared transformations of the independent variable), one variable has many coefficients and just by looking at them it is impossible to understand how the effect is shaped and what it means. In such cases plotting the effects is irreplaceable for understanding them.
-
-Let return to the airquality dataset and have a look at the association between temperature and ozone.
+Since we know that GDP per capita data is skewed, we can experiment with the log transformed variable. We can do the transformation within the formula, no need to modify the data directly.
 
 ```{r}
-ggplot(airquality, aes(Temp, Ozone)) +
-    geom_point()
+reg2 <- lm(lifeExp ~ log(gdpPercap) + pop + continent, data = gapminder_cs)
 
-```
-
-We can see that the relationship here is non-linear – for lower temperatures there is no association between temperature and ozone, but as the temperature rises, we see that the association with ozone becomes stronger. We can model this by including temperature and temperature squared in the linear model. Note that you do not have to transform the temperature variable first, you can indicate the transformation in the formula. You just have to embed it in the I() function to remind R that it should be treated “as it is”.
-
-```{r}
-reg2 <- lm(Ozone ~ Temp + I(Temp^2), data = airquality)
 summary(reg2)
 ```
 
-Interpreting the coefficients is rather difficult in this context (one is negative, other is positive). Let's plot it to have a better understanding of what is happening in our model.
+
+
+For further diagnostic plots, we can use the `ggfortify` extension of ggplot. This allows us to quickly plot key diagnostics and if needed use the `ggplot` syntax to change elements of the plots. The `ggfortify::autoplot()` figures everything out for us. You can select which plots you need with the `which = 1:6` option.
 
 ```{r}
-plot(effect("Temp", reg2))
-```
-
-For further diagnostic plots, we can use the `ggfortify` extension of ggplot. This allows us to quickly plot key diagnostics and if needed use the `ggplot` syntax to change elements of the plots. The `autoplot()` figures everything out for us. You can select which plots you need with the `which = 1:6` option.
-
-```{r}
-library(ggfortify)
-
 autoplot(reg1, which = 1:6, ncol = 3, label.size = 3)
 ```
 
@@ -281,20 +319,21 @@ It is also useful to keep in mind that if you call the `summary()` function on a
 
 ```{r, collapse=FALSE}
 summary_reg1 <- summary(reg1)
+
 str(summary_reg1)
 ```
 
-To make the somewhat messy regression output more "tidy", we'll use the `broom` package's `tidy()` function. It creates a data frame from our regression object with the estimate, se, f statistics and p.value columns, and each IV as row. 
+### Using `broom`
+
+To make the somewhat messy regression output more "tidy", we'll use the `broom` package's `broom::tidy()` function. It creates a data frame from our regression object with the estimate, se, f statistics and p.value columns, and each IV as row. 
 
 ```{r}
-library(broom)
-
 reg1_tidy <- tidy(reg1, conf.int = TRUE)
 
 reg1_tidy
 ```
 
-To get more information into our data frame, use the `augment()` function, will add the fitted values, residuals as well. 
+To get more information into our data frame, use the `broom::augment()` function, will add the fitted values, residuals as well. 
 
 ```{r}
 reg1_aug <- augment(reg1)
@@ -304,7 +343,7 @@ head(reg1_aug, 10)
 
 
 
-If we need the model diagnostics, use the `glance()` function.
+If we need the model diagnostics, use the `broom::glance()` function.
 
 ```{r}
 glance(reg1)
