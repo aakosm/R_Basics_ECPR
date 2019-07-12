@@ -456,7 +456,7 @@ is.integer(int)
 
 ```
 
-#### Charactter
+#### Character
 
 For characters, you have to wrap the values between " " (or ' ') for R to recognize it as such.
 
@@ -523,15 +523,6 @@ num > 10
 # let's sum the results
 sum(num > 10)
 ```
-
-> QUICK EXCERCISE:  How about when we want to know the proportion of values in the vector `num` that are above a certain value? Use the functions that we have already discussed to calculate this automatically. (let's say 8)
-
-solution:
-```{r echo=FALSE}
-(sum(num > 8))/length(num)
-```
-
-
 
 
 

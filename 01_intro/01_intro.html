@@ -3339,8 +3339,8 @@ div.tocify {
 <a class="sourceLine" id="cb19-6" title="6"><span class="kw">is.integer</span>(int)</a>
 <a class="sourceLine" id="cb19-7" title="7"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
 </div>
-<div id="charactter" class="section level4">
-<h4><span class="header-section-number">3.3.2.2</span> Charactter</h4>
+<div id="character" class="section level4">
+<h4><span class="header-section-number">3.3.2.2</span> Character</h4>
 <p>For characters, you have to wrap the values between &quot; &quot; (or ’ ’) for R to recognize it as such.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="co"># a vector with character (string) values, with a length of 3 and 1</span></a>
 <a class="sourceLine" id="cb20-2" title="2">text1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Han&quot;</span>, <span class="st">&quot;shot&quot;</span>, <span class="st">&quot;first&quot;</span>) </a>
@@ -3395,44 +3395,39 @@ div.tocify {
 <a class="sourceLine" id="cb25-4" title="4"><span class="co"># let&#39;s sum the results</span></a>
 <a class="sourceLine" id="cb25-5" title="5"><span class="kw">sum</span>(num <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>)</a>
 <a class="sourceLine" id="cb25-6" title="6"><span class="co">#&gt; [1] 2</span></a></code></pre></div>
-<blockquote>
-<p>QUICK EXCERCISE: How about when we want to know the proportion of values in the vector <code>num</code> that are above a certain value? Use the functions that we have already discussed to calculate this automatically. (let’s say 8)</p>
-</blockquote>
-<p>solution:</p>
-<pre><code>#&gt; [1] 0.75</code></pre>
 </div>
 <div id="factors" class="section level4">
 <h4><span class="header-section-number">3.3.2.4</span> Factors</h4>
 <p>Another common data type in R is factor variable where you assign discrete levels to your values. It is commonly used in survey responses or for other categorical data (eye color, gender, political party preference, etc.). we can create a factor variable with the <code>factor</code> function, where we can add the elements and specify the levels.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">party_pref &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;social democrat&quot;</span>, <span class="st">&quot;social conservative&quot;</span>, <span class="st">&quot;liberal&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;social conservative&quot;</span>)</a>
-<a class="sourceLine" id="cb27-2" title="2"></a>
-<a class="sourceLine" id="cb27-3" title="3"><span class="co"># transform our character vector to factor</span></a>
-<a class="sourceLine" id="cb27-4" title="4">party_pref &lt;-<span class="st"> </span><span class="kw">factor</span>(party_pref, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;social democrat&quot;</span>, <span class="st">&quot;social conservative&quot;</span>, <span class="st">&quot;liberal&quot;</span>, <span class="st">&quot;green&quot;</span>))</a>
-<a class="sourceLine" id="cb27-5" title="5"></a>
-<a class="sourceLine" id="cb27-6" title="6">party_pref</a>
-<a class="sourceLine" id="cb27-7" title="7"><span class="co">#&gt; [1] social democrat     social conservative liberal            </span></a>
-<a class="sourceLine" id="cb27-8" title="8"><span class="co">#&gt; [4] green               green               social conservative</span></a>
-<a class="sourceLine" id="cb27-9" title="9"><span class="co">#&gt; Levels: social democrat social conservative liberal green</span></a>
-<a class="sourceLine" id="cb27-10" title="10"></a>
-<a class="sourceLine" id="cb27-11" title="11"><span class="co"># if we want to set a given order, we can do that too.</span></a>
-<a class="sourceLine" id="cb27-12" title="12">survey_response &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;agree&quot;</span>, <span class="st">&quot;neutral&quot;</span>, <span class="st">&quot;disagree&quot;</span>, <span class="st">&quot;neutral&quot;</span>, <span class="st">&quot;disagree&quot;</span>, <span class="st">&quot;disagree&quot;</span>, <span class="st">&quot;agree&quot;</span>), </a>
-<a class="sourceLine" id="cb27-13" title="13">                          <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;agree&quot;</span>, <span class="st">&quot;neutral&quot;</span>, <span class="st">&quot;disagree&quot;</span>), </a>
-<a class="sourceLine" id="cb27-14" title="14">                          <span class="dt">ordered =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb27-15" title="15"></a>
-<a class="sourceLine" id="cb27-16" title="16">survey_response</a>
-<a class="sourceLine" id="cb27-17" title="17"><span class="co">#&gt; [1] agree    neutral  disagree neutral  disagree disagree agree   </span></a>
-<a class="sourceLine" id="cb27-18" title="18"><span class="co">#&gt; Levels: agree &lt; neutral &lt; disagree</span></a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">party_pref &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;social democrat&quot;</span>, <span class="st">&quot;social conservative&quot;</span>, <span class="st">&quot;liberal&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;social conservative&quot;</span>)</a>
+<a class="sourceLine" id="cb26-2" title="2"></a>
+<a class="sourceLine" id="cb26-3" title="3"><span class="co"># transform our character vector to factor</span></a>
+<a class="sourceLine" id="cb26-4" title="4">party_pref &lt;-<span class="st"> </span><span class="kw">factor</span>(party_pref, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;social democrat&quot;</span>, <span class="st">&quot;social conservative&quot;</span>, <span class="st">&quot;liberal&quot;</span>, <span class="st">&quot;green&quot;</span>))</a>
+<a class="sourceLine" id="cb26-5" title="5"></a>
+<a class="sourceLine" id="cb26-6" title="6">party_pref</a>
+<a class="sourceLine" id="cb26-7" title="7"><span class="co">#&gt; [1] social democrat     social conservative liberal            </span></a>
+<a class="sourceLine" id="cb26-8" title="8"><span class="co">#&gt; [4] green               green               social conservative</span></a>
+<a class="sourceLine" id="cb26-9" title="9"><span class="co">#&gt; Levels: social democrat social conservative liberal green</span></a>
+<a class="sourceLine" id="cb26-10" title="10"></a>
+<a class="sourceLine" id="cb26-11" title="11"><span class="co"># if we want to set a given order, we can do that too.</span></a>
+<a class="sourceLine" id="cb26-12" title="12">survey_response &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;agree&quot;</span>, <span class="st">&quot;neutral&quot;</span>, <span class="st">&quot;disagree&quot;</span>, <span class="st">&quot;neutral&quot;</span>, <span class="st">&quot;disagree&quot;</span>, <span class="st">&quot;disagree&quot;</span>, <span class="st">&quot;agree&quot;</span>), </a>
+<a class="sourceLine" id="cb26-13" title="13">                          <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;agree&quot;</span>, <span class="st">&quot;neutral&quot;</span>, <span class="st">&quot;disagree&quot;</span>), </a>
+<a class="sourceLine" id="cb26-14" title="14">                          <span class="dt">ordered =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb26-15" title="15"></a>
+<a class="sourceLine" id="cb26-16" title="16">survey_response</a>
+<a class="sourceLine" id="cb26-17" title="17"><span class="co">#&gt; [1] agree    neutral  disagree neutral  disagree disagree agree   </span></a>
+<a class="sourceLine" id="cb26-18" title="18"><span class="co">#&gt; Levels: agree &lt; neutral &lt; disagree</span></a></code></pre></div>
 </div>
 <div id="missing-values" class="section level4">
 <h4><span class="header-section-number">3.3.2.5</span> Missing values</h4>
 <p>Missing values are denoted with <code>NA</code>.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="fl">2.45</span>, <span class="ot">NA</span>, <span class="dv">76</span>, <span class="ot">NA</span>)</a>
-<a class="sourceLine" id="cb28-2" title="2"></a>
-<a class="sourceLine" id="cb28-3" title="3">v</a>
-<a class="sourceLine" id="cb28-4" title="4"><span class="co">#&gt; [1]  1.00  2.45    NA 76.00    NA</span></a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="fl">2.45</span>, <span class="ot">NA</span>, <span class="dv">76</span>, <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb27-2" title="2"></a>
+<a class="sourceLine" id="cb27-3" title="3">v</a>
+<a class="sourceLine" id="cb27-4" title="4"><span class="co">#&gt; [1]  1.00  2.45    NA 76.00    NA</span></a></code></pre></div>
 <p>You can check if a value is missing with the <code>is.na</code> function.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">is.na</span>(v)</a>
-<a class="sourceLine" id="cb29-2" title="2"><span class="co">#&gt; [1] FALSE FALSE  TRUE FALSE  TRUE</span></a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">is.na</span>(v)</a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="co">#&gt; [1] FALSE FALSE  TRUE FALSE  TRUE</span></a></code></pre></div>
 <blockquote>
 <p>QUICK EXCERCISE: Check how many NAs we have in the object <code>v</code>, we just created. The correct solution should be the following output. (Hint: remember that logicals have numerical values!)</p>
 </blockquote>
@@ -3443,69 +3438,69 @@ div.tocify {
 <h3><span class="header-section-number">3.3.3</span> Matrices (OPTIONAL)</h3>
 <p>Data frames can contain diverse types of data like factors, numbers and logical values. A matrix is a similarly two-dimensional data object that can contain only one type of value.</p>
 <p>Let’s create a matrix that contains three columns with 4 values each. You can create a matrix with the function matrix(), which requires at least the following arguments: a vector of values that make up the matrix, the number of rows, the number of columns.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">values1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb31-2" title="2">mat1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(values1, <span class="dt">nrow =</span> <span class="dv">5</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb31-3" title="3"></a>
-<a class="sourceLine" id="cb31-4" title="4">mat1</a>
-<a class="sourceLine" id="cb31-5" title="5"><span class="co">#&gt;      [,1] [,2] [,3] [,4]</span></a>
-<a class="sourceLine" id="cb31-6" title="6"><span class="co">#&gt; [1,]    1    6   11   16</span></a>
-<a class="sourceLine" id="cb31-7" title="7"><span class="co">#&gt; [2,]    2    7   12   17</span></a>
-<a class="sourceLine" id="cb31-8" title="8"><span class="co">#&gt; [3,]    3    8   13   18</span></a>
-<a class="sourceLine" id="cb31-9" title="9"><span class="co">#&gt; [4,]    4    9   14   19</span></a>
-<a class="sourceLine" id="cb31-10" title="10"><span class="co">#&gt; [5,]    5   10   15   20</span></a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">values1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb30-2" title="2">mat1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(values1, <span class="dt">nrow =</span> <span class="dv">5</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb30-3" title="3"></a>
+<a class="sourceLine" id="cb30-4" title="4">mat1</a>
+<a class="sourceLine" id="cb30-5" title="5"><span class="co">#&gt;      [,1] [,2] [,3] [,4]</span></a>
+<a class="sourceLine" id="cb30-6" title="6"><span class="co">#&gt; [1,]    1    6   11   16</span></a>
+<a class="sourceLine" id="cb30-7" title="7"><span class="co">#&gt; [2,]    2    7   12   17</span></a>
+<a class="sourceLine" id="cb30-8" title="8"><span class="co">#&gt; [3,]    3    8   13   18</span></a>
+<a class="sourceLine" id="cb30-9" title="9"><span class="co">#&gt; [4,]    4    9   14   19</span></a>
+<a class="sourceLine" id="cb30-10" title="10"><span class="co">#&gt; [5,]    5   10   15   20</span></a></code></pre></div>
 <p>Matrices can also have row and column names like data frames.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">rownames</span>(mat1) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;case1&quot;</span>, <span class="st">&quot;case2&quot;</span>, <span class="st">&quot;case3&quot;</span>, <span class="st">&quot;case4&quot;</span>, <span class="st">&quot;case5&quot;</span>)</a>
-<a class="sourceLine" id="cb32-2" title="2"></a>
-<a class="sourceLine" id="cb32-3" title="3">mat1</a>
-<a class="sourceLine" id="cb32-4" title="4"><span class="co">#&gt;       [,1] [,2] [,3] [,4]</span></a>
-<a class="sourceLine" id="cb32-5" title="5"><span class="co">#&gt; case1    1    6   11   16</span></a>
-<a class="sourceLine" id="cb32-6" title="6"><span class="co">#&gt; case2    2    7   12   17</span></a>
-<a class="sourceLine" id="cb32-7" title="7"><span class="co">#&gt; case3    3    8   13   18</span></a>
-<a class="sourceLine" id="cb32-8" title="8"><span class="co">#&gt; case4    4    9   14   19</span></a>
-<a class="sourceLine" id="cb32-9" title="9"><span class="co">#&gt; case5    5   10   15   20</span></a>
-<a class="sourceLine" id="cb32-10" title="10"></a>
-<a class="sourceLine" id="cb32-11" title="11"></a>
-<a class="sourceLine" id="cb32-12" title="12"><span class="kw">colnames</span>(mat1) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Var1&quot;</span>, <span class="st">&quot;Var2&quot;</span>, <span class="st">&quot;Var3&quot;</span>, <span class="st">&quot;Var4&quot;</span>)</a>
-<a class="sourceLine" id="cb32-13" title="13"></a>
-<a class="sourceLine" id="cb32-14" title="14">mat1</a>
-<a class="sourceLine" id="cb32-15" title="15"><span class="co">#&gt;       Var1 Var2 Var3 Var4</span></a>
-<a class="sourceLine" id="cb32-16" title="16"><span class="co">#&gt; case1    1    6   11   16</span></a>
-<a class="sourceLine" id="cb32-17" title="17"><span class="co">#&gt; case2    2    7   12   17</span></a>
-<a class="sourceLine" id="cb32-18" title="18"><span class="co">#&gt; case3    3    8   13   18</span></a>
-<a class="sourceLine" id="cb32-19" title="19"><span class="co">#&gt; case4    4    9   14   19</span></a>
-<a class="sourceLine" id="cb32-20" title="20"><span class="co">#&gt; case5    5   10   15   20</span></a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">rownames</span>(mat1) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;case1&quot;</span>, <span class="st">&quot;case2&quot;</span>, <span class="st">&quot;case3&quot;</span>, <span class="st">&quot;case4&quot;</span>, <span class="st">&quot;case5&quot;</span>)</a>
+<a class="sourceLine" id="cb31-2" title="2"></a>
+<a class="sourceLine" id="cb31-3" title="3">mat1</a>
+<a class="sourceLine" id="cb31-4" title="4"><span class="co">#&gt;       [,1] [,2] [,3] [,4]</span></a>
+<a class="sourceLine" id="cb31-5" title="5"><span class="co">#&gt; case1    1    6   11   16</span></a>
+<a class="sourceLine" id="cb31-6" title="6"><span class="co">#&gt; case2    2    7   12   17</span></a>
+<a class="sourceLine" id="cb31-7" title="7"><span class="co">#&gt; case3    3    8   13   18</span></a>
+<a class="sourceLine" id="cb31-8" title="8"><span class="co">#&gt; case4    4    9   14   19</span></a>
+<a class="sourceLine" id="cb31-9" title="9"><span class="co">#&gt; case5    5   10   15   20</span></a>
+<a class="sourceLine" id="cb31-10" title="10"></a>
+<a class="sourceLine" id="cb31-11" title="11"></a>
+<a class="sourceLine" id="cb31-12" title="12"><span class="kw">colnames</span>(mat1) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Var1&quot;</span>, <span class="st">&quot;Var2&quot;</span>, <span class="st">&quot;Var3&quot;</span>, <span class="st">&quot;Var4&quot;</span>)</a>
+<a class="sourceLine" id="cb31-13" title="13"></a>
+<a class="sourceLine" id="cb31-14" title="14">mat1</a>
+<a class="sourceLine" id="cb31-15" title="15"><span class="co">#&gt;       Var1 Var2 Var3 Var4</span></a>
+<a class="sourceLine" id="cb31-16" title="16"><span class="co">#&gt; case1    1    6   11   16</span></a>
+<a class="sourceLine" id="cb31-17" title="17"><span class="co">#&gt; case2    2    7   12   17</span></a>
+<a class="sourceLine" id="cb31-18" title="18"><span class="co">#&gt; case3    3    8   13   18</span></a>
+<a class="sourceLine" id="cb31-19" title="19"><span class="co">#&gt; case4    4    9   14   19</span></a>
+<a class="sourceLine" id="cb31-20" title="20"><span class="co">#&gt; case5    5   10   15   20</span></a></code></pre></div>
 </div>
 <div id="lists" class="section level3">
 <h3><span class="header-section-number">3.3.4</span> Lists</h3>
 <p>Lists are versatile data structures where each element can be vectors of different lenght and type. What that means is that we can combine our objects that we created in this session into a list with the <code>list</code> function.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">list1 &lt;-<span class="st"> </span><span class="kw">list</span>(logic, mat1, text1)</a>
-<a class="sourceLine" id="cb33-2" title="2"><span class="co"># now let&#39;s check this monstrosity</span></a>
-<a class="sourceLine" id="cb33-3" title="3">list1</a>
-<a class="sourceLine" id="cb33-4" title="4"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb33-5" title="5"><span class="co">#&gt; [1]  TRUE FALSE FALSE</span></a>
-<a class="sourceLine" id="cb33-6" title="6"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb33-7" title="7"><span class="co">#&gt; [[2]]</span></a>
-<a class="sourceLine" id="cb33-8" title="8"><span class="co">#&gt;       Var1 Var2 Var3 Var4</span></a>
-<a class="sourceLine" id="cb33-9" title="9"><span class="co">#&gt; case1    1    6   11   16</span></a>
-<a class="sourceLine" id="cb33-10" title="10"><span class="co">#&gt; case2    2    7   12   17</span></a>
-<a class="sourceLine" id="cb33-11" title="11"><span class="co">#&gt; case3    3    8   13   18</span></a>
-<a class="sourceLine" id="cb33-12" title="12"><span class="co">#&gt; case4    4    9   14   19</span></a>
-<a class="sourceLine" id="cb33-13" title="13"><span class="co">#&gt; case5    5   10   15   20</span></a>
-<a class="sourceLine" id="cb33-14" title="14"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb33-15" title="15"><span class="co">#&gt; [[3]]</span></a>
-<a class="sourceLine" id="cb33-16" title="16"><span class="co">#&gt; [1] &quot;Han&quot;   &quot;shot&quot;  &quot;first&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">list1 &lt;-<span class="st"> </span><span class="kw">list</span>(logic, mat1, text1)</a>
+<a class="sourceLine" id="cb32-2" title="2"><span class="co"># now let&#39;s check this monstrosity</span></a>
+<a class="sourceLine" id="cb32-3" title="3">list1</a>
+<a class="sourceLine" id="cb32-4" title="4"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb32-5" title="5"><span class="co">#&gt; [1]  TRUE FALSE FALSE</span></a>
+<a class="sourceLine" id="cb32-6" title="6"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb32-7" title="7"><span class="co">#&gt; [[2]]</span></a>
+<a class="sourceLine" id="cb32-8" title="8"><span class="co">#&gt;       Var1 Var2 Var3 Var4</span></a>
+<a class="sourceLine" id="cb32-9" title="9"><span class="co">#&gt; case1    1    6   11   16</span></a>
+<a class="sourceLine" id="cb32-10" title="10"><span class="co">#&gt; case2    2    7   12   17</span></a>
+<a class="sourceLine" id="cb32-11" title="11"><span class="co">#&gt; case3    3    8   13   18</span></a>
+<a class="sourceLine" id="cb32-12" title="12"><span class="co">#&gt; case4    4    9   14   19</span></a>
+<a class="sourceLine" id="cb32-13" title="13"><span class="co">#&gt; case5    5   10   15   20</span></a>
+<a class="sourceLine" id="cb32-14" title="14"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb32-15" title="15"><span class="co">#&gt; [[3]]</span></a>
+<a class="sourceLine" id="cb32-16" title="16"><span class="co">#&gt; [1] &quot;Han&quot;   &quot;shot&quot;  &quot;first&quot;</span></a></code></pre></div>
 <p>You can add attributes to lists as well.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">list2 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">letters =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>], <span class="dt">numbers =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">logical =</span> <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb34-2" title="2"></a>
-<a class="sourceLine" id="cb34-3" title="3"><span class="kw">attributes</span>(list2)</a>
-<a class="sourceLine" id="cb34-4" title="4"><span class="co">#&gt; $names</span></a>
-<a class="sourceLine" id="cb34-5" title="5"><span class="co">#&gt; [1] &quot;letters&quot; &quot;numbers&quot; &quot;logical&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">list2 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">letters =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>], <span class="dt">numbers =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">logical =</span> <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb33-2" title="2"></a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="kw">attributes</span>(list2)</a>
+<a class="sourceLine" id="cb33-4" title="4"><span class="co">#&gt; $names</span></a>
+<a class="sourceLine" id="cb33-5" title="5"><span class="co">#&gt; [1] &quot;letters&quot; &quot;numbers&quot; &quot;logical&quot;</span></a></code></pre></div>
 <p>You can check the attributes and also the structure of our list object with the <code>str()</code> function.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">str</span>(list2)</a>
-<a class="sourceLine" id="cb35-2" title="2"><span class="co">#&gt; List of 3</span></a>
-<a class="sourceLine" id="cb35-3" title="3"><span class="co">#&gt;  $ letters: chr [1:6] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</span></a>
-<a class="sourceLine" id="cb35-4" title="4"><span class="co">#&gt;  $ numbers: int [1:3] 1 2 3</span></a>
-<a class="sourceLine" id="cb35-5" title="5"><span class="co">#&gt;  $ logical: logi [1:5] TRUE TRUE FALSE FALSE TRUE</span></a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">str</span>(list2)</a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="co">#&gt; List of 3</span></a>
+<a class="sourceLine" id="cb34-3" title="3"><span class="co">#&gt;  $ letters: chr [1:6] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</span></a>
+<a class="sourceLine" id="cb34-4" title="4"><span class="co">#&gt;  $ numbers: int [1:3] 1 2 3</span></a>
+<a class="sourceLine" id="cb34-5" title="5"><span class="co">#&gt;  $ logical: logi [1:5] TRUE TRUE FALSE FALSE TRUE</span></a></code></pre></div>
 <p>You can access an item in your list by the single bracket operator <code>[ ]</code> or the double bracket operator <code>[[ ]]</code>.</p>
 <blockquote>
 <p>QUICK EXCERCISE: lets select the second item in our list2 with both methods and see what happens. What is the difference?</p>
@@ -3518,29 +3513,29 @@ div.tocify {
 <div id="coercion" class="section level3">
 <h3><span class="header-section-number">3.3.5</span> Coercion</h3>
 <p>You can change the type of data inside a vector. This is fairly straightforward and not used regularly. Some examples include from integer to double:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1">integers &lt;-<span class="st"> </span><span class="kw">c</span>(1L, 5L, 10L)</a>
-<a class="sourceLine" id="cb38-2" title="2"></a>
-<a class="sourceLine" id="cb38-3" title="3"><span class="kw">typeof</span>(integers)</a>
-<a class="sourceLine" id="cb38-4" title="4"><span class="co">#&gt; [1] &quot;integer&quot;</span></a>
-<a class="sourceLine" id="cb38-5" title="5"></a>
-<a class="sourceLine" id="cb38-6" title="6"><span class="co"># then converting</span></a>
-<a class="sourceLine" id="cb38-7" title="7">numerics &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(integers)</a>
-<a class="sourceLine" id="cb38-8" title="8"></a>
-<a class="sourceLine" id="cb38-9" title="9"><span class="kw">typeof</span>(numerics)</a>
-<a class="sourceLine" id="cb38-10" title="10"><span class="co">#&gt; [1] &quot;double&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">integers &lt;-<span class="st"> </span><span class="kw">c</span>(1L, 5L, 10L)</a>
+<a class="sourceLine" id="cb37-2" title="2"></a>
+<a class="sourceLine" id="cb37-3" title="3"><span class="kw">typeof</span>(integers)</a>
+<a class="sourceLine" id="cb37-4" title="4"><span class="co">#&gt; [1] &quot;integer&quot;</span></a>
+<a class="sourceLine" id="cb37-5" title="5"></a>
+<a class="sourceLine" id="cb37-6" title="6"><span class="co"># then converting</span></a>
+<a class="sourceLine" id="cb37-7" title="7">numerics &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(integers)</a>
+<a class="sourceLine" id="cb37-8" title="8"></a>
+<a class="sourceLine" id="cb37-9" title="9"><span class="kw">typeof</span>(numerics)</a>
+<a class="sourceLine" id="cb37-10" title="10"><span class="co">#&gt; [1] &quot;double&quot;</span></a></code></pre></div>
 <p>Coercing functions starts with <code>as.*</code>, where * marks the datatype. Start typing <code>as.</code> in RStudio and see how many functions are suggested with this beggining.</p>
 </div>
 </div>
 <div id="combining-stuff-into-data-frame" class="section level2">
 <h2><span class="header-section-number">3.4</span> Combining stuff into data frame</h2>
 <p>As promised before, we can weave all the vectors into one data frame. To do this, we use the <code>data.frame</code> function. First, we will create some vectors and then do the combination.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">student &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Weber&quot;</span>, <span class="st">&quot;Hobbs&quot;</span>, <span class="st">&quot;Curie&quot;</span>, <span class="st">&quot;Lovelace&quot;</span>, <span class="st">&quot;Perlman&quot;</span>)</a>
-<a class="sourceLine" id="cb39-2" title="2">grade &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;A&quot;</span>), <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="dt">ordered =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb39-3" title="3">height &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">178</span>, <span class="dv">165</span>, <span class="dv">170</span>, <span class="dv">190</span>, <span class="dv">157</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1">student &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Weber&quot;</span>, <span class="st">&quot;Hobbs&quot;</span>, <span class="st">&quot;Curie&quot;</span>, <span class="st">&quot;Lovelace&quot;</span>, <span class="st">&quot;Perlman&quot;</span>)</a>
+<a class="sourceLine" id="cb38-2" title="2">grade &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;A&quot;</span>), <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="dt">ordered =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb38-3" title="3">height &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">178</span>, <span class="dv">165</span>, <span class="dv">170</span>, <span class="dv">190</span>, <span class="dv">157</span>)</a></code></pre></div>
 <p>Now combining the various vectors into one data frame, which we will call appropriately <code>pupils</code>.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">pupils &lt;-<span class="st"> </span><span class="kw">data.frame</span>(student, grade, height)</a>
-<a class="sourceLine" id="cb40-2" title="2"></a>
-<a class="sourceLine" id="cb40-3" title="3">pupils</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">pupils &lt;-<span class="st"> </span><span class="kw">data.frame</span>(student, grade, height)</a>
+<a class="sourceLine" id="cb39-2" title="2"></a>
+<a class="sourceLine" id="cb39-3" title="3">pupils</a></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["student"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["grade"],"name":[2],"type":["ord"],"align":["right"]},{"label":["height"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Weber","2":"A","3":"178"},{"1":"Hobbs","2":"C","3":"165"},{"1":"Curie","2":"A","3":"170"},{"1":"Lovelace","2":"B","3":"190"},{"1":"Perlman","2":"A","3":"157"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -3550,39 +3545,39 @@ div.tocify {
 <div id="indexing-intro" class="section level2">
 <h2><span class="header-section-number">3.5</span> Indexing intro</h2>
 <p>You can select individual rows and columns similarly as we did before with vectors. R uses the following logic: <code>data_frame[rows, columns]</code>. While this approach works for rectangular data (such as data frames and matrices) you can also refer to column by their names. For this, use the <code>$</code> sign. Remember: <strong>rows by columns</strong> is the order for indexing in R!</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"></a>
-<a class="sourceLine" id="cb41-2" title="2"><span class="co"># check the second row</span></a>
-<a class="sourceLine" id="cb41-3" title="3">pupils[<span class="dv">2</span>, ]</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"></a>
+<a class="sourceLine" id="cb40-2" title="2"><span class="co"># check the second row</span></a>
+<a class="sourceLine" id="cb40-3" title="3">pupils[<span class="dv">2</span>, ]</a></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["student"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["grade"],"name":[2],"type":["ord"],"align":["right"]},{"label":["height"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Hobbs","2":"C","3":"165","_rn_":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"></a>
-<a class="sourceLine" id="cb42-2" title="2"><span class="co"># check the first column</span></a>
-<a class="sourceLine" id="cb42-3" title="3">pupils[, <span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb42-4" title="4"><span class="co">#&gt; [1] Weber    Hobbs    Curie    Lovelace Perlman </span></a>
-<a class="sourceLine" id="cb42-5" title="5"><span class="co">#&gt; Levels: Curie Hobbs Lovelace Perlman Weber</span></a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"></a>
+<a class="sourceLine" id="cb41-2" title="2"><span class="co"># check the first column</span></a>
+<a class="sourceLine" id="cb41-3" title="3">pupils[, <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb41-4" title="4"><span class="co">#&gt; [1] Weber    Hobbs    Curie    Lovelace Perlman </span></a>
+<a class="sourceLine" id="cb41-5" title="5"><span class="co">#&gt; Levels: Curie Hobbs Lovelace Perlman Weber</span></a></code></pre></div>
 <p>Note that the <code>data.frame()</code> function creates factors from our character vector. If you want to avoid this (which is usually the case) by an additional argument telling R not to do that: <code>data.frame(country, pop, stringsAsFactors = FALSE)</code></p>
 <p>Access columns by their name. After the <code>$</code> sign, press tab and RStudio will give you a list of column in the data frame.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"></a>
-<a class="sourceLine" id="cb43-2" title="2">pupils<span class="op">$</span>Grade</a>
-<a class="sourceLine" id="cb43-3" title="3"><span class="co">#&gt; NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"></a>
+<a class="sourceLine" id="cb42-2" title="2">pupils<span class="op">$</span>Grade</a>
+<a class="sourceLine" id="cb42-3" title="3"><span class="co">#&gt; NULL</span></a></code></pre></div>
 <p>What just happened?</p>
 <p>Kind reminder: R is <strong>case sensitive.</strong> This is annoying at first, but you get used to it fast (as it is a common source of errors).</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1">pupils<span class="op">$</span>grade</a>
-<a class="sourceLine" id="cb44-2" title="2"><span class="co">#&gt; [1] A C A B A</span></a>
-<a class="sourceLine" id="cb44-3" title="3"><span class="co">#&gt; Levels: A &lt; B &lt; C</span></a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">pupils<span class="op">$</span>grade</a>
+<a class="sourceLine" id="cb43-2" title="2"><span class="co">#&gt; [1] A C A B A</span></a>
+<a class="sourceLine" id="cb43-3" title="3"><span class="co">#&gt; Levels: A &lt; B &lt; C</span></a></code></pre></div>
 <p>You can check the attributes of your object with the <code>attributes</code> function.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">attributes</span>(pupils)</a>
-<a class="sourceLine" id="cb45-2" title="2"><span class="co">#&gt; $names</span></a>
-<a class="sourceLine" id="cb45-3" title="3"><span class="co">#&gt; [1] &quot;student&quot; &quot;grade&quot;   &quot;height&quot; </span></a>
-<a class="sourceLine" id="cb45-4" title="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb45-5" title="5"><span class="co">#&gt; $class</span></a>
-<a class="sourceLine" id="cb45-6" title="6"><span class="co">#&gt; [1] &quot;data.frame&quot;</span></a>
-<a class="sourceLine" id="cb45-7" title="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb45-8" title="8"><span class="co">#&gt; $row.names</span></a>
-<a class="sourceLine" id="cb45-9" title="9"><span class="co">#&gt; [1] 1 2 3 4 5</span></a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">attributes</span>(pupils)</a>
+<a class="sourceLine" id="cb44-2" title="2"><span class="co">#&gt; $names</span></a>
+<a class="sourceLine" id="cb44-3" title="3"><span class="co">#&gt; [1] &quot;student&quot; &quot;grade&quot;   &quot;height&quot; </span></a>
+<a class="sourceLine" id="cb44-4" title="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb44-5" title="5"><span class="co">#&gt; $class</span></a>
+<a class="sourceLine" id="cb44-6" title="6"><span class="co">#&gt; [1] &quot;data.frame&quot;</span></a>
+<a class="sourceLine" id="cb44-7" title="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb44-8" title="8"><span class="co">#&gt; $row.names</span></a>
+<a class="sourceLine" id="cb44-9" title="9"><span class="co">#&gt; [1] 1 2 3 4 5</span></a></code></pre></div>
 </div>
 </div>
 
