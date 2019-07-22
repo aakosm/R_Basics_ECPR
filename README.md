@@ -1,18 +1,18 @@
 # R Basics - An intro course for everything R
 
-- [R Basics - An intro course for everything R](#R-Basics---An-intro-course-for-everything-R)
-  - [Brief description](#Brief-description)
-  - [How to install R and RStudio](#How-to-install-R-and-RStudio)
-    - [Download and install R](#Download-and-install-R)
-    - [Download and install RStudio](#Download-and-install-RStudio)
-  - [Course outline and links to notebooks](#Course-outline-and-links-to-notebooks)
+- [R Basics - An intro course for everything R](#r-basics---an-intro-course-for-everything-r)
+  - [Brief description](#brief-description)
+  - [How to install R and RStudio](#how-to-install-r-and-rstudio)
+    - [Download and install R](#download-and-install-r)
+    - [Download and install RStudio](#download-and-install-rstudio)
+  - [Course outline and links to notebooks](#course-outline-and-links-to-notebooks)
 
 ## Brief description
 This is an introductory course for R, taught at the [ECPR Summer School 2019](https://ecpr.eu/Events/131). For the details on this course please see the [syllabus](https://github.com/aakosm/R_Basics_ECPR/blob/master/syllabus.pdf) and the [course's ECPR webpage](https://ecpr.eu/Events/PanelDetails.aspx?PanelID=8411&EventID=131). The course repository is here: [https://github.com/aakosm/R_Basics_ECPR](https://github.com/aakosm/R_Basics_ECPR) which contains all the materials and source codes for the notebooks used during the course.
 
 The course is also available as a GitHub Page here if you want less clutter: [https://aakosm.github.io/R_Basics_ECPR/](https://aakosm.github.io/R_Basics_ECPR/)
 
-
+----
 
 ## How to install R and RStudio
 
@@ -35,6 +35,7 @@ We will use RStudio for the course, that is an integrated development environmen
 
 You can get the fully functional free version from here: [https://www.rstudio.com/products/rstudio/download/](https://www.rstudio.com/products/rstudio/download/#download)
 
+---
 
 ## Course outline and links to notebooks
 
@@ -45,9 +46,10 @@ You can get the fully functional free version from here: [https://www.rstudio.co
 3. Data wrangling pt.1 - [notebook](https://aakosm.github.io/R_Basics_ECPR/03_data_wrangling1/03_data_wrangling.html)
 4. Data wrangling pt.2 - [notebook](https://aakosm.github.io/R_Basics_ECPR/04_data_wrangling2/04_data_wrangling2.html)
 
+
 **Day2**
 
-5. Data visualization with `ggplot2` - [notebook](https://aakosm.github.io/R_Basics_ECPR/05_ggplot2/05_ggplot2.html)
-6. Writing functions and iterating in R - [notebook](https://aakosm.github.io/R_Basics_ECPR/06_functions/06_functions.html)
-7. Some statistics (linear regression, hypothesis testing) - [notebook](https://aakosm.github.io/R_Basics_ECPR/07_statistics/07_statistics.html)
-8. Intro to Rmarkdown - [notebook](https://aakosm.github.io/R_Basics_ECPR/08_rmarkdown/08_rmarkdown.html)
+1. Data visualization with `ggplot2` - notebook
+2. Writing functions and iterating in R - notebook
+3. Some statistics (linear regression, hypothesis testing) - notebook
+4. Intro to Rmarkdown - notebook
