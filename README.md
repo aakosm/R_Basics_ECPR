@@ -38,13 +38,14 @@ You can get the fully functional free version from here: [https://www.rstudio.co
 ---
 
 ## Course outline and links to notebooks
+(The notebooks will be uploaded here and to Moodle on Friday)
 
 **Day 1**
 
-1. Intro to R - [notebook](https://aakosm.github.io/R_Basics_ECPR/01_intro/01_intro.html)
-2. Importing, exporting and exploring data - [notebook](https://aakosm.github.io/R_Basics_ECPR/02_data_exploration/02_data_exploration.html)
-3. Data wrangling pt.1 - [notebook](https://aakosm.github.io/R_Basics_ECPR/03_data_wrangling1/03_data_wrangling.html)
-4. Data wrangling pt.2 - [notebook](https://aakosm.github.io/R_Basics_ECPR/04_data_wrangling2/04_data_wrangling2.html)
+1. Intro to R - notebook
+2. Importing, exporting and exploring data - notebook
+3. Data wrangling pt.1 - notebook
+4. Data wrangling pt.2 - notebook
 
 
 **Day2**
