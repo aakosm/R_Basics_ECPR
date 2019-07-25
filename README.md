@@ -54,3 +54,6 @@ You can get the fully functional free version from here: [https://www.rstudio.co
 2. Writing functions and iterating in R - notebook
 3. Some statistics (linear regression, hypothesis testing) - notebook
 4. Intro to Rmarkdown - notebook
+
+## License
+The material in this repository is made available under the [MIT license](https://opensource.org/licenses/mit-license.php).
