@@ -47,6 +47,7 @@ You can get the fully functional free version from here: [https://www.rstudio.co
 3. Data wrangling pt.1 - [notebook](https://aakosm.github.io/R_Basics_ECPR/03_data_wrangling1/03_data_wrangling.html)
 4. Data wrangling pt.2 - [notebook](https://aakosm.github.io/R_Basics_ECPR/04_data_wrangling2/04_data_wrangling2.html)
 
+Excercises for Day 1 - [notebook](https://aakosm.github.io/R_Basics_ECPR/excercises/day_one_excercises.html)
 
 **Day2**
 
@@ -54,6 +55,8 @@ You can get the fully functional free version from here: [https://www.rstudio.co
 2. Writing functions and iterating in R - notebook
 3. Some statistics (linear regression, hypothesis testing) - notebook
 4. Intro to Rmarkdown - notebook
+
+Excercises for Day 2 - [notebook](https://aakosm.github.io/R_Basics_ECPR/excercises/day_two_excercises.html)
 
 ## License
 The material in this repository is made available under the [MIT license](https://opensource.org/licenses/mit-license.php).
