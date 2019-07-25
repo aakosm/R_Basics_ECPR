@@ -1,0 +1,248 @@
+---
+title: "Excercises for Day Two materials"
+subtitle: ""
+author: "Akos Mate"
+date: '2019 July'
+output:
+    html_document:
+        code_folding: "show"
+        number_sections: TRUE
+        toc: true
+        toc_depth: 4
+        toc_float: true
+        theme: flatly
+        highlight: tango
+        df_print: paged
+        css: ../rmd_style.css
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      collapse = TRUE,
+                      comment = "#>",
+                      message = FALSE
+)
+```
+
+We are using some new datasets for practice. If you are interested in various datasets for practice or personal pet projects, a good starting point is the (Tidy Tuesday)[https://github.com/rfordatascience/tidytuesday] GitHub repo where they post a new dataset each week.
+
+The packages needed for these excercises are:
+
+* `readr`
+* `ggplot2`
+* `ggridges`
+* `dplyr`
+* `gapminder`
+
+# Session 5 
+## Excercise 1 - Practicing `ggplot`
+
+> Using the 'squads' data, create a scatterplot where the number of caps (international games played) is depicted along the X-axis, goals (international goals scored) is visualized at the Y-axis. Let's add colors based on the footballer's position.
+
+More info on the dataset: https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-07-09
+
+```{r}
+squads <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-07-09/squads.csv")
+```
+
+
+
+```{r echo=FALSE}
+library(ggplot2)
+
+ggplot(data = squads,
+       aes(x = caps,
+           y = goals,
+           color = pos)) +
+  geom_point()
+
+```
+
+
+
+
+> Now, overlay multiple histograms on each other -- use fill = variable to have a histogram of goals with players of different position depicted with different colors. You might want to trim (set the limits of) the x-axis at 75 goals, as very few players score more than that. 
+
+```{r echo=FALSE}
+ggplot(data = squads,
+       mapping = aes(x = goals,
+                     fill = pos)) +
+  xlim(0, 75) +
+  geom_histogram(binwidth = 0.4, position = "identity", alpha = 0.65)
+
+```
+
+> Create a histogram of caps (international games played), fill the bars with grey color, and overlap it with a density plot, filled with the color 'salmon'! 
+
+```{r echo=FALSE}
+ggplot(squads,
+       mapping = aes(x = caps)) +
+  geom_histogram(aes(y = ..density..),
+                 binwidth = 0.4,
+                 fill = "grey",
+                 color = "black") +
+  xlim(0, 200) +
+  geom_density(alpha = 0.25, fill = "salmon")
+```
+
+
+
+Now we use the other part of the World Cup data.
+
+```{r}
+wwc_outcomes <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-07-09/wwc_outcomes.csv")
+```
+
+> Create a joyplot of *scores* using the wwc_outcomes data, using the result (i.e. whether the team won, lost or tied) as a grouping variable! 
+
+```{r}
+library(ggridges)
+```
+
+```{r echo=FALSE}
+ggplot(data = wwc_outcomes,
+       mapping = aes(x = score,
+                     y = win_status,
+                     fill = win_status)) +
+  geom_density_ridges(scale = 0.8, alpha = 0.5)
+```
+
+
+
+# Session 6
+## Excercise 2 -  Loops
+> Excercise: recode gapminder gdp variable to below and above average dummy with a loop.
+> Check the result of the loop!
+
+```{r}
+library(gapminder)
+
+gapminder_df <- gapminder
+```
+
+
+```{r echo=FALSE}
+gapminder_df$gdp <- NA
+gdp_mean <- mean(gapminder_df$gdpPercap, na.rm = TRUE)
+
+for (i in 1:nrow(gapminder_df)) {
+    gdp_test <- gapminder_df$gdpPercap[i] > gdp_mean
+    
+    if (gdp_test) {
+        gapminder_df$gdp[i] <- "above"
+    } else {
+        gapminder_df$gdp[i] <- "below"
+    }
+}
+
+```
+
+```{r}
+table(gapminder_df$gdp)
+```
+
+
+## Excercise 3 - Writing functions
+> Write a function called `z_score`, which standardizes (creates z scores from raw scores) an input vector. The formula for the standardization is: $z=\frac{x-\bar{x}}{S}$  
+> where, $x$ is the raw score (numeric value in our input vector) in our sample; $\bar{x}$ is the sample mean; and $S$ is the sample standard deviation.  
+
+
+```{r echo=FALSE}
+z_score <- function(x, sample) {
+    
+    output <- (x-mean(sample, na.rm = TRUE))/sd(sample, na.rm = TRUE)
+    
+    return(output)
+}
+
+```
+
+Check our function with some random, normally distributed data, and standardize the first 5 value.
+
+```{r}
+height <- rnorm(50, 0, 1)
+
+z_score(height[1:5], height)
+```
+
+
+
+## Excercise 4 - `apply` function
+> Select the numerical variables of the `msleep` data and put into a new dataframe called `msleep_num` (explore the `select_if` function!)
+
+```{r}
+library(dplyr)
+msleep_df <- msleep
+```
+
+
+```{r echo=FALSE}
+msleep_num <- msleep %>% 
+  select_if(is.numeric)
+```
+
+```{r}
+glimpse(msleep_num)
+```
+
+> Calculate the column means of the msleep_num data frame. Use the `apply()` function!  
+> you should get something similar:  
+
+
+```{r echo=FALSE}
+apply(msleep_num, 2, function(x) mean(x, na.rm = TRUE))
+
+```
+
+
+# Session 7
+## Excercise 5 - t-test
+> Load the iris dataset and see if the difference between the petal lenght between the setosa and versicolor are statistically significant or not. Tip: use the previously learned filter() function from dplyr to prep the data. You should get something similar as below. Load the iris data with `data(iris)`. You can turn the scientific notation off with `options(scipen = 999)`.
+
+```{r echo=FALSE}
+iris_t_prep <- iris %>% 
+    filter(Species == c("setosa", "versicolor"))
+
+iris_t <- t.test(Petal.Length~Species, data = iris_t_prep)
+
+options(scipen = 999)
+
+iris_t
+```
+
+## Excercise 6 - ANOVA
+> Quick excercise: load the `airquality` data from the `survey` package (with `data(airquality)`) and test with anova if the monthly mean temepratures are significantly different from each other. The temperature is `Temp` and the monhts are `Month`. How would you interpret the result?
+
+```{r}
+data(airquality)
+```
+
+
+```{r echo=FALSE}
+anova2 <- aov(Temp~Month, data=airquality)
+summary(anova2)
+```
+
+## regression
+> Using the `gapminder` dataset, filter our observations to the year of 2007 and see what are the effects of the GDP per capita, population and continent on the life expectancy. 
+
+The result should be something like this. How would you interpret this?
+
+```{r echo=FALSE}
+data(gapminder)
+
+options(scipen = 5)
+
+gap_prep <- gapminder %>% 
+    filter(year == 2007)
+
+reg_gap <- lm(lifeExp ~ gdpPercap + pop + continent,
+          data = gap_prep)
+```
+
+```{r}
+
+summary(reg_gap)
+```
+
