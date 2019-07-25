@@ -26,7 +26,9 @@ knitr::opts_chunk$set(echo = TRUE,
 ```
 
 
-In this document you'll find some excercises that you can practice your newly acquired R knowledge. The solutions can be accessed if you check the `.rmd` source file. (you really should try solving them alone)
+In this document you'll find some excercises that you can practice your newly acquired R knowledge. The solutions can be accessed if you check the `.rmd` source file. (you really should try solving them alone) 
+
+You can see the source files for the notebooks in the course repository: [https://github.com/aakosm/R_Basics_ECPR](https://github.com/aakosm/R_Basics_ECPR)
 
 If you have any problems or questions regarding the excercises we can go over them on Saturday morning in the class. My advice: don't be afraid to break things, try multiple approaches and think of it as the beggining of the journey. If something is hard at first try, don't fixate on it, move on and then return to the problem later.
 
