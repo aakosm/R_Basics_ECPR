@@ -85,7 +85,7 @@ We will look at the [Quality of Government basic data set](https://qog.pol.gu.se
 
 Loading it from the GitHub repository requires only the url of the data file and then the `read_csv` function will take care of the rest. 
 
-```{r}
+```{r, eval = FALSE}
 qog_text <- readr::read_csv("https://rawgit.com/aakosm/r_basics_ecpr18/master/qog_bas_cs_jan18.csv")
 
 ```
@@ -275,14 +275,8 @@ One key advantage of the `tidyverse` packages is their compatibility with the us
 The `%>%` essentially pipes the data on it's left as the first argument for function after it.
 
 
-> Quick excercise: Replicate the below code with using the pipe operator
-
-```{r eval=FALSE}
-# dani :)
-```
-
-
 In our first step, we group our data by continent and then create a summary variable, that tells us the mean GDP for each continent. Check the code snippet below to see the role of each line.
+
 ```{r}
 # let's see the GDP by continents
 gdp_cont <- gapminder_df %>% # we will use the gapminder data
