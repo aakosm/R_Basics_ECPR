@@ -391,47 +391,17 @@ knitr::include_graphics("figures/EDA-boxplot.png")
 *Source: [Wickham, Hadley, and Garrett Grolemund. R for data science: import, tidy, transform, visualize, and model data. " O'Reilly Media, Inc.", 2016.](http://r4ds.had.co.nz/exploratory-data-analysis.html)*
 
 
-To use barplot instead we just simply switch to the `geom_bar()`.
-
-```{r error=TRUE}
-ggplot(data = gapminder_df,
-                mapping = aes(x = continent,
-                              y = lifeExp)) +
-  geom_bar()
-```
-
-Ooops. ggplot's `geom_bar()` wants to carry out a counting excercise that is not able to run if we have a y variable specified. We can solve this in two ways. First, let's tell ggplot that it should not do any additional calculations, by specifying it with the `stat = "identity"`. 
-
-```{r collapse=FALSE}
-# using stat = "identity"
-ggplot(data = gapminder_df,
-       mapping = aes(x = continent, y = lifeExp)) +
-  geom_bar(stat = "identity")
-
-```
-
-
-Second, we can use the `geom_col` geom, which already assumes the "identity" argument.
-```{r}
-ggplot(data = gapminder_df,
-                mapping = aes(x = continent,
-                              y = lifeExp)) +
-  geom_col()
-```
-
-
 
 Let's use the gapminder dataset we have loaded and investigate the life expectancy and gdp per capita variables. We'll use the `geom_point()` argument which we join to the `p1` object with a `+`. 
 
 In `p1` we specify the data source and the variables we want to plot. To this object we can attach the desired representation style with the `geom_` functions.
 
 ```{r}
-p1 <- ggplot(data = gapminder_df,
-             mapping = aes(x = gdpPercap,
-                           y = lifeExp))
+ggplot(data = gapminder_df,
+       mapping = aes(x = gdpPercap,
+                     y = lifeExp)) +
+  geom_point()
 
-
-p1 + geom_point()
 ```
 
 Let's refine this plot slightly: add labels, title, caption, and also transform the GDP variable. (plus some other minor cosmetics)
@@ -439,31 +409,32 @@ Let's refine this plot slightly: add labels, title, caption, and also transform 
 Check the comments in the code snippet to see what each line does!
 
 ```{r}
-p1 + geom_point(alpha = 0.25) + # inside the geom_ we can modify its attributes. Here we set the transparency levels of the points
-    scale_x_log10() + # rescale our x axis
-    labs(x = "GDP per capita", 
-         y = "Life expectancy",
-         title = "Connection between GDP and Life expectancy",
-         subtitle = "Points are country-years",
-         caption = "Source: Gapminder")
+ggplot(data = gapminder_df,
+       mapping = aes(x = gdpPercap,
+                     y = lifeExp)) +
+  geom_point(alpha = 0.25) + # inside the geom_ we can modify its attributes. Here we set the transparency levels of the points
+  scale_x_log10() + # rescale our x axis
+  labs(x = "GDP per capita", 
+       y = "Life expectancy",
+       title = "Connection between GDP and Life expectancy",
+       subtitle = "Points are country-years",
+       caption = "Source: Gapminder")
 ```
 
 So far so good. With some minor additions the plot looks all right. But what if we want to see how each continent fares in this relationship? We need to change the `p1` object to include a new argument in the mapping function: `color = variable`. Now it is clear that European countries (country-years) are clustered in the high-GDP/high life longevity upper right corner.
 
 ```{r}
-p1_grouped <- ggplot(data = gapminder_df,
-             mapping = aes(x = gdpPercap,
-                           y = lifeExp,
-                           color = continent)) # this is where we specify that we want to color the data by continents.
-
-p1_grouped + geom_point(alpha = 0.75) + # inside the geom_ we can modify its attributes. Here we set the transparency levels of the points
-    scale_x_log10() + # rescale our x axis
-    labs(x = "GDP per capita (log $)", 
-         y = "Life expectancy",
-         title = "Connection between GDP and Life expectancy",
-         subtitle = "Points are country-years",
-         caption = "Source: Gapminder dataset")
-
+ggplot(data = gapminder_df,
+       mapping = aes(x = gdpPercap,
+                     y = lifeExp,
+                     color = continent)) + # this is where we specify that we want to color the data by continents.
+  geom_point(alpha = 0.75) +
+  scale_x_log10() + # rescale our x axis
+  labs(x = "GDP per capita (log $)", 
+       y = "Life expectancy",
+       title = "Connection between GDP and Life expectancy",
+       subtitle = "Points are country-years",
+       caption = "Source: Gapminder dataset")
 ```
 
 
@@ -472,7 +443,6 @@ When we are done with our nice figure, we can save it as well. I'd suggest to al
 ```{r eval=FALSE}
 ggsave("gapminder_scatter.png", dpi = 600) # the higher the dpi, the smoother your plot'll look like.
 ```
-
 
 
 We can see how life expectancy changed in Mexico, Afghanistan, Sudan and Slovenia by using the `geom_line()` geom. For this, we create a new dataset by subsetting the gapminder one. The `%in%` operator does the same thing as the `==` but for multiple values. For subsetting we use the `dplyr::filter()` function. Don't worry if this sounds too much, we will spend a whole session on how to subset and clean our data.
