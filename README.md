@@ -51,10 +51,10 @@ Excercises for Day 1 - [notebook](https://aakosm.github.io/R_Basics_ECPR/excerci
 
 **Day2**
 
-1. Data visualization with `ggplot2` - notebook
-2. Writing functions and iterating in R - notebook
-3. Some statistics (linear regression, hypothesis testing) - notebook
-4. Intro to Rmarkdown - notebook
+5. Data visualization with `ggplot2` - [notebook](https://aakosm.github.io/R_Basics_ECPR/05_ggplot2/05_ggplot2.html)
+6. Writing functions and iterating in R - [notebook](https://aakosm.github.io/R_Basics_ECPR/06_functions/06_functions.html)
+7. Some statistics (linear regression, hypothesis testing) - [notebook](https://aakosm.github.io/R_Basics_ECPR/07_statistics/07_statistics.html)
+8. Intro to Rmarkdown - [notebook](https://aakosm.github.io/R_Basics_ECPR/08_rmarkdown/08_rmarkdown.html)
 
 Excercises for Day 2 - [notebook](https://aakosm.github.io/R_Basics_ECPR/excercises/day_two_excercises.html)
 
